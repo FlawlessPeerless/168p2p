@@ -40,7 +40,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
     // gson
     implementation 'com.google.code.gson:gson:2.8.2'
+    // 字体图标 Android-iconify
+    implementation 'com.mikepenz:iconics-core:3.0.2@aar'
+    implementation "com.mikepenz:iconics-views:3.0.2@aar"
 
-    implementation "com.mikepenz:iconics-core:3.0.2@aar"
-    implementation project(':magic-core')
+    compile project(path: ':magic-core')
 }

@@ -2,9 +2,7 @@ package com.magic.szh.cnf_168p2p.icon;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.graphics.drawable.Icon;
 
-import com.mikepenz.iconics.typeface.GenericFont;
 import com.mikepenz.iconics.typeface.IIcon;
 import com.mikepenz.iconics.typeface.ITypeface;
 
@@ -22,47 +20,11 @@ import java.util.LinkedList;
  */
 
 public class Iconfont implements ITypeface {
-
     private static final String TTF_FILE = "iconfont.ttf";
 
-    public enum Icon implements IIcon {
-        alipay('\ue702'),  // 支付宝
-        wechat('\ue7e5'),  // 微信
-        weibo('\ue6b2');   // 微博
-
-        private final char character;
-        private static ITypeface typeface;
-
-        Icon(char character) {
-            this.character = character;
-        }
-
-        @Override
-        public String getFormattedName() {
-            return "{" + name() + "}";
-        }
-
-        @Override
-        public String getName() {
-            return name();
-        }
-
-        @Override
-        public char getCharacter() {
-            return character;
-        }
-
-        @Override
-        public ITypeface getTypeface() {
-            if (typeface == null)
-                typeface = new Iconfont();
-            return typeface;
-        }
-    }
-
-    private static HashMap<String, Character> mCharacters;
-
     private static Typeface typeface = null;
+
+    private static HashMap<String, Character> mChars;
 
     @Override
     public IIcon getIcon(String key) {
@@ -71,14 +33,15 @@ public class Iconfont implements ITypeface {
 
     @Override
     public HashMap<String, Character> getCharacters() {
-        if (mCharacters == null) {
+        if (mChars == null) {
             HashMap<String, Character> aChars = new HashMap<>();
             for (Icon v : Icon.values()) {
                 aChars.put(v.name(), v.character);
             }
-            mCharacters = aChars;
+            mChars = aChars;
         }
-        return mCharacters;
+
+        return mChars;
     }
 
     @Override
@@ -88,7 +51,7 @@ public class Iconfont implements ITypeface {
 
     @Override
     public String getFontName() {
-        return "";
+        return "CustomFont";
     }
 
     @Override
@@ -98,21 +61,24 @@ public class Iconfont implements ITypeface {
 
     @Override
     public int getIconCount() {
-        return mCharacters.size();
+        return mChars.size();
     }
 
     @Override
     public Collection<String> getIcons() {
         Collection<String> icons = new LinkedList<>();
+
         for (Icon value : Icon.values()) {
             icons.add(value.name());
         }
+
         return icons;
     }
 
+
     @Override
     public String getAuthor() {
-        return "magic_su";
+        return "SampleCustomFont";
     }
 
     @Override
@@ -136,14 +102,48 @@ public class Iconfont implements ITypeface {
     }
 
     @Override
-    public Typeface getTypeface(Context ctx) {
+    public Typeface getTypeface(Context context) {
         if (typeface == null) {
             try {
-                typeface = Typeface.createFromAsset(ctx.getAssets(),"fonts/" + TTF_FILE);
+                typeface = Typeface.createFromAsset(context.getAssets(), "fonts/" + TTF_FILE);
             } catch (Exception e) {
                 return null;
             }
         }
         return typeface;
+    }
+
+    public enum Icon implements IIcon {
+        icc_alipay('\ue702'),   // 支付宝
+        icc_wechat('\ue7e5'),   // 微信
+        icc_weibo('\ue6b2');    // 微博
+
+        char character;
+
+        Icon(char character) {
+            this.character = character;
+        }
+
+        public String getFormattedName() {
+            return "{" + name() + "}";
+        }
+
+        public char getCharacter() {
+            return character;
+        }
+
+        public String getName() {
+            return name();
+        }
+
+        // remember the typeface so we can use it later
+        private static ITypeface typeface;
+
+        public ITypeface getTypeface() {
+            if (typeface == null) {
+                typeface = new Iconfont();
+            }
+            return typeface;
+        }
     }
 }

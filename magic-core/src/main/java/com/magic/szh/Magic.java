@@ -25,4 +25,8 @@ public final class Magic {
     private static HashMap<Object, Object> getConfigurations() {
         return Configurator.getInstance().getConfigs();
     }
+
+    public static Context getApplication() {
+        return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXT);
+    }
 }

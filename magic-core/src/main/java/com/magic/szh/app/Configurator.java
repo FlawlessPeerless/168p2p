@@ -6,7 +6,6 @@ import com.mikepenz.iconics.typeface.ITypeface;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * project: CNF_168p2p
@@ -38,8 +37,8 @@ public class Configurator {
     }
 
     public final void configure() {
-        MAGIC_CONFIGS.put(ConfigType.CONFIG_READY, true);
         initIcons();
+        MAGIC_CONFIGS.put(ConfigType.CONFIG_READY, true);
     }
 
     /**
@@ -57,10 +56,9 @@ public class Configurator {
      * 初始化自定义字体
      */
     private void initIcons() {
-        Iconics.init(getConfiguration(ConfigType.APPLICATION_CONTEXT));
         if (ICONS.size() > 0) {
-            Iconics.registerFont(ICONS.get(0));
-            for (int i = 1; i < ICONS.size(); i++) {
+            Iconics.init(Magic.getApplication());
+            for (int i = 0; i < ICONS.size(); i++) {
                 Iconics.registerFont(ICONS.get(i));
             }
         }
@@ -93,7 +91,7 @@ public class Configurator {
      * @return 获取的配置
      */
     @SuppressWarnings("unchecked")
-    final <T> T getConfiguration(Enum<ConfigType> key) {
+    private <T> T getConfiguration(Enum<ConfigType> key) {
         checkConfiguration();
         return (T) MAGIC_CONFIGS.get(key);
     }
