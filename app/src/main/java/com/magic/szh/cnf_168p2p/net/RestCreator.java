@@ -29,7 +29,7 @@ public class RestCreator {
         return ParamsHolder.PARAMS;
     }
 
-    public static RestService getRestService() {
+    static RestService getRestService() {
         return RestServiceHolder.REST_SERVICE;
     }
 

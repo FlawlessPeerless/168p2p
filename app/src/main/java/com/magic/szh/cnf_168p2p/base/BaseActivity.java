@@ -7,10 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.magic.szh.cnf_168p2p.R;
-import com.magic.szh.cnf_168p2p.content.launch.LaunchFragment;
 
 /**
  * project: CNF_168p2p
