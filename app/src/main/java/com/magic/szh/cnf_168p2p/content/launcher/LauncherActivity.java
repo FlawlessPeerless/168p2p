@@ -3,12 +3,11 @@ package com.magic.szh.cnf_168p2p.content.launcher;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.magic.szh.cnf_168p2p.base.BaseActivity;
 import com.magic.szh.cnf_168p2p.content.home.HomeActivity;
-import com.magic.szh.cnf_168p2p.net.RestClient;
-import com.magic.szh.cnf_168p2p.net.callback.ISuccess;
+import com.magic.szh.net.RestClient;
 
 public class LauncherActivity extends BaseActivity {
     // 启动页持续时间
@@ -24,12 +23,7 @@ public class LauncherActivity extends BaseActivity {
         }, CONST_DURATION_TIME);
         RestClient.builder()
                 .url("https://api.168p2p.com/version/version/peizhi")
-                .success(new ISuccess() {
-                    @Override
-                    public void onSuccess(String response) {
-                        Toast.makeText(LauncherActivity.this, response, Toast.LENGTH_SHORT).show();
-                    }
-                })
+                .success(response -> Log.e("123",response))
                 .build()
                 .get();
     }

@@ -1,4 +1,4 @@
-package com.magic.szh.cnf_168p2p.net;
+package com.magic.szh.net;
 
 import java.util.Map;
 

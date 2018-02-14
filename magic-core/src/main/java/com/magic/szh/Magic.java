@@ -26,7 +26,16 @@ public final class Magic {
         return Configurator.getInstance().getConfigs();
     }
 
+    /**
+     * 对外方法 获取应用context
+     * @return Context
+     */
     public static Context getApplication() {
         return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXT);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T getConfiguration(ConfigType key) {
+        return (T) getConfigurations().get(key);
     }
 }

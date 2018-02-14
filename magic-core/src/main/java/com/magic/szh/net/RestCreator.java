@@ -1,4 +1,8 @@
-package com.magic.szh.cnf_168p2p.net;
+package com.magic.szh.net;
+
+import com.magic.szh.Magic;
+import com.magic.szh.app.ConfigType;
+import com.magic.szh.app.Configurator;
 
 import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
@@ -16,7 +20,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  * description: retrofit 构造类 (单例)
  */
 
-public class RestCreator {
+class RestCreator {
     private static final class ParamsHolder {
         static final WeakHashMap<String, Object> PARAMS = new WeakHashMap<>();
     }
@@ -34,7 +38,7 @@ public class RestCreator {
     }
 
     private static final class RetrofitHolder {
-        private static final String BASE_URL = "https://api.168p2p.com/"; // 接口host
+        private static final String BASE_URL = Magic.getConfiguration(ConfigType.API_HOST);
         private static final Retrofit RETROFIT_CLIENT = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(OkHttpHolder.OK_HTTP_CLIENT)

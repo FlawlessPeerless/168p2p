@@ -1,4 +1,4 @@
-package com.magic.szh.cnf_168p2p.net.callback;
+package com.magic.szh.net.callback;
 
 import retrofit2.Call;
 import retrofit2.Callback;

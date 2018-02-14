@@ -1,9 +1,9 @@
-package com.magic.szh.cnf_168p2p.net;
+package com.magic.szh.net;
 
-import com.magic.szh.cnf_168p2p.net.callback.IError;
-import com.magic.szh.cnf_168p2p.net.callback.IFailure;
-import com.magic.szh.cnf_168p2p.net.callback.IRequest;
-import com.magic.szh.cnf_168p2p.net.callback.ISuccess;
+import com.magic.szh.net.callback.IError;
+import com.magic.szh.net.callback.IFailure;
+import com.magic.szh.net.callback.IRequest;
+import com.magic.szh.net.callback.ISuccess;
 
 import java.util.Map;
 import java.util.WeakHashMap;

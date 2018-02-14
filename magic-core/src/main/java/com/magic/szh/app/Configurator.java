@@ -91,7 +91,7 @@ public class Configurator {
      * @return 获取的配置
      */
     @SuppressWarnings("unchecked")
-    private <T> T getConfiguration(Enum<ConfigType> key) {
+    final  <T> T getConfiguration(Enum<ConfigType> key) {
         checkConfiguration();
         return (T) MAGIC_CONFIGS.get(key);
     }
