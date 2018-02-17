@@ -3,6 +3,7 @@ package com.magic.szh.cnf_168p2p.content.home;
 import android.support.v4.app.Fragment;
 
 import com.magic.szh.cnf_168p2p.base.BaseActivity;
+import com.magic.szh.cnf_168p2p.base.MagicFragment;
 
 /**
  * project: CNF_168p2p
@@ -16,12 +17,7 @@ import com.magic.szh.cnf_168p2p.base.BaseActivity;
 public class HomeActivity extends BaseActivity {
 
     @Override
-    protected void initialize() {
-
-    }
-
-    @Override
-    protected Fragment createFragment() {
+    public MagicFragment setRootFragment() {
         return new HomeFragment();
     }
 }

@@ -38,6 +38,7 @@ dependencies {
     // 字体图标 Android-iconify
     implementation 'com.mikepenz:iconics-core:3.0.2@aar'
     implementation "com.mikepenz:iconics-views:3.0.2@aar"
-
+    // ConvenientBanner
+    implementation 'com.bigkoo:convenientbanner:2.0.5'
     compile project(path: ':magic-core')
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.magic.szh.cnf_168p2p.R;
 import com.magic.szh.cnf_168p2p.base.BaseFragment;
+import com.magic.szh.cnf_168p2p.base.MagicFragment;
 
 /**
  * project: CNF_168p2p
@@ -18,10 +19,15 @@ import com.magic.szh.cnf_168p2p.base.BaseFragment;
  * description: 主页fragment
  */
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends MagicFragment {
 
     @Override
-    protected View createView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    public Object setLayout() {
+        return R.layout.fragment_home;
+    }
+
+    @Override
+    public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
+
     }
 }

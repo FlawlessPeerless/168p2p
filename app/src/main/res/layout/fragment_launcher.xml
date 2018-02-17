@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_launcher"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.AppCompatTextView
+        tools:text="5秒"
+        android:background="@drawable/border_circle_timer"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="14dp"
+        android:id="@+id/text_view_launcher_timer"
+        android:layout_width="60dp"
+        android:layout_height="60dp"/>
+</RelativeLayout>

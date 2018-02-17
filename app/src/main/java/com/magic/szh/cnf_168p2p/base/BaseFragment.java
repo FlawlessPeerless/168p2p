@@ -1,5 +1,6 @@
 package com.magic.szh.cnf_168p2p.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,9 +30,19 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = createView(inflater, container, savedInstanceState);
-        mUnbinder = ButterKnife.bind(this, view);
-        return view;
+        final View rootView;
+        if (setLayout() instanceof Integer) {
+            rootView = inflater.inflate((Integer)setLayout(), container, false);
+        } else if (setLayout() instanceof View) {
+            rootView = (View) setLayout();
+        } else {
+            throw new ClassCastException("setLayout() type must be int or View");
+        }
+
+        mUnbinder = ButterKnife.bind(this, rootView);
+        onBindView(savedInstanceState, rootView);
+
+        return rootView;
     }
 
     @Override
@@ -40,5 +51,22 @@ public abstract class BaseFragment extends Fragment {
         if (mUnbinder != null) mUnbinder.unbind();
     }
 
-    protected abstract View createView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
+
+    public abstract Object setLayout();
+
+    /**
+     * 视图被绑定后的回调
+     * @param savedInstanceState 已存储的状态实例生命周期
+     * @param rootView 视图类
+     */
+    public abstract void onBindView(@Nullable Bundle savedInstanceState, View rootView);
+
+    /**
+     * 启动新的activity
+     * @param fragment 要启动的fragment
+     * @param taskMode 启动的模式
+     */
+    protected void start(MagicFragment fragment, int taskMode) {
+
+    }
 }
