@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
@@ -24,6 +25,7 @@ public class GuideFragment extends MagicFragment implements OnItemClickListener 
     private static final ArrayList<Integer> BANNERS = new ArrayList<>();
 
     private void initBanner() {
+        BANNERS.clear();
         BANNERS.add(R.drawable.guide_1);
         BANNERS.add(R.drawable.guide_2);
         BANNERS.add(R.drawable.guide_3);
@@ -50,9 +52,9 @@ public class GuideFragment extends MagicFragment implements OnItemClickListener 
     @Override
     public void onItemClick(int position) {
         if (position == BANNERS.size() - 1) {
-            MagicPreference.setAppFlag(LauncherTag.HAS_FIRST_LAUNCHER_APP.name(), true);
-            // todo 检查是否初次登录
-            start(new GuideFragment(), 123);
+            MagicPreference.setAppFlag(LauncherTag.HAS_FIRST_LAUNCHER_APP.name(), false);
+            // start(new GuideFragment(), SINGLETASK);
+            Toast.makeText(getContext(), "123", Toast.LENGTH_SHORT).show();
         }
     }
 }

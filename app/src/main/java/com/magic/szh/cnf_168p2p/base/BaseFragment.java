@@ -14,6 +14,7 @@ import com.mikepenz.iconics.context.IconicsLayoutInflater;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * project: CNF_168p2p
@@ -24,7 +25,7 @@ import butterknife.Unbinder;
  * description: fragment 基类
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends SupportFragment {
     private Unbinder mUnbinder;
 
     @Nullable
@@ -60,13 +61,4 @@ public abstract class BaseFragment extends Fragment {
      * @param rootView 视图类
      */
     public abstract void onBindView(@Nullable Bundle savedInstanceState, View rootView);
-
-    /**
-     * 启动新的activity
-     * @param fragment 要启动的fragment
-     * @param taskMode 启动的模式
-     */
-    protected void start(MagicFragment fragment, int taskMode) {
-
-    }
 }

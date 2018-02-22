@@ -4,13 +4,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.magic.szh.cnf_168p2p.R;
 import com.magic.szh.cnf_168p2p.base.MagicFragment;
+import com.magic.szh.cnf_168p2p.content.signup.SignUpFragment;
 import com.magic.szh.util.storage.MagicPreference;
 import com.magic.szh.util.timer.BaseTimerTask;
 import com.magic.szh.util.timer.ITimerListener;
@@ -34,7 +37,11 @@ public class LauncherFragment extends MagicFragment implements ITimerListener {
 
     @OnClick(R.id.text_view_launcher_timer)
     void onClickTimerView() {
-        checkIsFirstLauncher();
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
+            checkIsFirstLauncher();
+        }
     }
 
     @Override
@@ -73,10 +80,10 @@ public class LauncherFragment extends MagicFragment implements ITimerListener {
      */
     private void checkIsFirstLauncher() {
         if(MagicPreference.getAppFlag(LauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
-            // TODO 启动GuideFragment
+            startWithPop(new GuideFragment());
         } else {
             // TODO 检查用户是否登录App
-
+            startWithPop(new SignUpFragment());
         }
     }
 }

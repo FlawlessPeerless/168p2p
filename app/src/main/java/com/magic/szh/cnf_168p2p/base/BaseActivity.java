@@ -1,5 +1,6 @@
 package com.magic.szh.cnf_168p2p.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ContentFrameLayout;
 
 import com.magic.szh.cnf_168p2p.R;
+import com.mikepenz.iconics.context.IconicsContextWrapper;
+
+import me.yokeyword.fragmentation.SupportActivity;
 
 /**
  * project: CNF_168p2p
@@ -20,7 +24,7 @@ import com.magic.szh.cnf_168p2p.R;
  * description: activity 基类
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends SupportActivity {
 
     private FragmentManager mFragmentManager;
 
@@ -52,13 +56,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void loadRootFragment(int resId, MagicFragment magicFragment) {
-        if (magicFragment.isAdded()) return;
-        FragmentTransaction transaction = mFragmentManager.beginTransaction();
-        transaction.add(resId, magicFragment);
-        transaction.commit();
-    }
-
     /**
      * 垃圾回收
      */
@@ -66,5 +63,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         System.gc();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(IconicsContextWrapper.wrap(newBase));
     }
 }
