@@ -1,5 +1,6 @@
 package com.magic.szh.cnf_168p2p.content.launcher;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
@@ -12,7 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.magic.szh.cnf_168p2p.R;
+import com.magic.szh.cnf_168p2p.base.BaseActivity;
 import com.magic.szh.cnf_168p2p.base.MagicFragment;
+import com.magic.szh.cnf_168p2p.content.home.HomeActivity;
 import com.magic.szh.cnf_168p2p.content.signup.SignUpFragment;
 import com.magic.szh.util.storage.MagicPreference;
 import com.magic.szh.util.timer.BaseTimerTask;
@@ -79,11 +82,13 @@ public class LauncherFragment extends MagicFragment implements ITimerListener {
      * 判断是否首次登录
      */
     private void checkIsFirstLauncher() {
-        if(MagicPreference.getAppFlag(LauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
-            startWithPop(new GuideFragment());
+        if (MagicPreference.getAppFlag(LauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
+            BaseActivity activity = (BaseActivity) getActivity();
+            activity.replaceFragment(R.id.layout_fragment_wrapper, new GuideFragment());
         } else {
             // TODO 检查用户是否登录App
-            startWithPop(new SignUpFragment());
+            startActivity(new Intent(getActivity(), HomeActivity.class));
+            getActivity().finish();
         }
     }
 }

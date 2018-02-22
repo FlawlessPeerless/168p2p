@@ -38,7 +38,7 @@ public class SignInFragment extends MagicFragment {
     }
     @OnClick(R.id.text_view_link_sign_up)
     void onClickLink() {
-        start(new SignUpFragment());
+        // start(new SignUpFragment(), SINGLETASK);
     }
 
     @Override

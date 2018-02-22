@@ -38,4 +38,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
     // gson
     implementation 'com.google.code.gson:gson:2.8.2'
+    // logger
+    implementation 'com.orhanobut:logger:2.1.1'
 }

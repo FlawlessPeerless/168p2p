@@ -2,6 +2,7 @@ package com.magic.szh.cnf_168p2p.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,7 +25,7 @@ import me.yokeyword.fragmentation.SupportActivity;
  * description: activity 基类
  */
 
-public abstract class BaseActivity extends SupportActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     private FragmentManager mFragmentManager;
 
@@ -35,25 +36,34 @@ public abstract class BaseActivity extends SupportActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
-
-        setContentView(R.layout.activity_fragment_wrapper);
         mFragmentManager = getSupportFragmentManager();
         initContainer(savedInstanceState);
     }
 
-    /**
-     * 设置初始fragment
-     * @return MagicFragment 实现类
-     */
-    public abstract MagicFragment setRootFragment();
+    public abstract void initContainer(@Nullable Bundle savedInstanceState);
 
-    private void initContainer(@Nullable Bundle savedInstanceState) {
-        final ContentFrameLayout container = new ContentFrameLayout(this);
-        container.setId(R.id.fragment_container);
-        setContentView(container);
-        if (savedInstanceState == null) {
-            loadRootFragment(R.id.fragment_container, setRootFragment());
-        }
+    /**
+     * 添加fragment
+     * @param viewId 挂载的view id
+     * @param fragment 挂载的fragment
+     */
+    public void addFragment(@IdRes int viewId, MagicFragment fragment) {
+        mFragmentManager
+                .beginTransaction()
+                .add(viewId, fragment)
+                .commit();
+    }
+
+    /**
+     * 替换fragment
+     * @param viewId 挂载的view id
+     * @param fragment 挂载的view
+     */
+    public void replaceFragment(@IdRes int viewId, MagicFragment fragment) {
+        mFragmentManager
+                .beginTransaction()
+                .replace(viewId, fragment)
+                .commit();
     }
 
     /**
@@ -65,6 +75,10 @@ public abstract class BaseActivity extends SupportActivity {
         System.gc();
     }
 
+    /**
+     * 重写自定义文字图标
+     * @param newBase
+     */
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(IconicsContextWrapper.wrap(newBase));

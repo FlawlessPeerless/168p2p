@@ -25,7 +25,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  * description: fragment 基类
  */
 
-public abstract class BaseFragment extends SupportFragment {
+public abstract class BaseFragment extends Fragment {
     private Unbinder mUnbinder;
 
     @Nullable
@@ -50,6 +50,10 @@ public abstract class BaseFragment extends SupportFragment {
     public void onDestroyView() {
         super.onDestroyView();
         if (mUnbinder != null) mUnbinder.unbind();
+    }
+
+    public BaseActivity getBaseActivity() {
+        return (BaseActivity)getActivity();
     }
 
 

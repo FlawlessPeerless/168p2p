@@ -1,6 +1,7 @@
 package com.magic.szh.cnf_168p2p.content.launcher;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.magic.szh.cnf_168p2p.R;
 import com.magic.szh.cnf_168p2p.base.MagicFragment;
+import com.magic.szh.cnf_168p2p.content.home.HomeActivity;
 import com.magic.szh.util.storage.MagicPreference;
 
 import java.util.ArrayList;
@@ -53,8 +55,8 @@ public class GuideFragment extends MagicFragment implements OnItemClickListener 
     public void onItemClick(int position) {
         if (position == BANNERS.size() - 1) {
             MagicPreference.setAppFlag(LauncherTag.HAS_FIRST_LAUNCHER_APP.name(), false);
-            // start(new GuideFragment(), SINGLETASK);
-            Toast.makeText(getContext(), "123", Toast.LENGTH_SHORT).show();
+            getBaseActivity().startActivity(new Intent(getActivity(), HomeActivity.class));
+            getActivity().finish();
         }
     }
 }
