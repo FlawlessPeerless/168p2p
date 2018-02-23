@@ -1,5 +1,7 @@
 package com.magic.szh.cnf_168p2p.api.response;
 
+import com.google.gson.Gson;
+
 /**
  * project: CNF_168p2p
  * package: com.magic.szh.cnf_168p2p.api.response
