@@ -5,8 +5,23 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:visibility="gone"
         android:text="{icc_alipay} = {icc_wechat} = {icc_weibo}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--内容根布局-->
+        <LinearLayout
+            android:id="@+id/root_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- 公告栏 -->
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

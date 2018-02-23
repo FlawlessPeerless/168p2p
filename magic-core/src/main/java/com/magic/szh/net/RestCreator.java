@@ -3,9 +3,15 @@ package com.magic.szh.net;
 import com.magic.szh.Magic;
 import com.magic.szh.app.ConfigType;
 import com.magic.szh.app.Configurator;
+import com.magic.szh.net.https.HttpsUtil;
+import com.magic.szh.net.intercepter.TokenInterceptor;
 
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -50,6 +56,7 @@ class RestCreator {
         private static final int TIME_OUT = 60;
         private static final OkHttpClient OK_HTTP_CLIENT = new OkHttpClient.Builder()
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .addNetworkInterceptor(new TokenInterceptor())
                 .build();
     }
 

@@ -44,5 +44,12 @@ dependencies {
     // Fragmentation
     implementation 'me.yokeyword:fragmentation:1.2.6'
     implementation 'me.yokeyword:fragmentation-swipeback:1.2.6'
+    // gson
+    implementation 'com.google.code.gson:gson:2.8.2'
+    // glide
+    implementation ('com.github.bumptech.glide:glide:4.6.1') {
+        exclude group: "com.android.support"
+    }
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     compile project(path: ':magic-core')
 }

@@ -10,5 +10,5 @@ package com.magic.szh.net.callback;
  */
 
 public interface IFailure {
-    void onFailure();
+    void onFailure(Throwable t);
 }
