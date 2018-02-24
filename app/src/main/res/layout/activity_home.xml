@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
     <android.support.design.widget.TabLayout
+        android:background="#fff"
         app:tabIndicatorColor="@android:color/transparent"
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"

@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
@@ -16,11 +18,13 @@ import com.magic.szh.cnf_168p2p.api.response.ResponseHome;
 import com.magic.szh.cnf_168p2p.api.response.ResponseHomeBanner;
 import com.magic.szh.cnf_168p2p.api.url.Api;
 import com.magic.szh.cnf_168p2p.base.MagicFragment;
+import com.magic.szh.cnf_168p2p.ui.notice_bar.NoticeBar;
 import com.magic.szh.net.RestClient;
 import com.magic.szh.net.callback.ISuccess;
 import com.magic.szh.util.log.MagicLogger;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -39,6 +43,8 @@ public class HomeFragment extends MagicFragment implements OnItemClickListener {
 
     @BindView(R.id.root_layout)
     LinearLayout mContentLayout;
+    @BindView(R.id.view_flipper_notice_bar)
+    NoticeBar mViewFlipper;
 
     @Override
     public Object setLayout() {
@@ -100,10 +106,22 @@ public class HomeFragment extends MagicFragment implements OnItemClickListener {
                     if (responseHome.getCode() == 200) {
                         Toast.makeText(getActivity(), responseHome.getMsg(), Toast.LENGTH_SHORT)
                                 .show();
+                        initNoticeBar(responseHome.noticeList);
                     }
                 })
                 .build()
                 .get();
+    }
+
+    /**
+     * 初始化公告栏
+     * @param notices 公告栏数据
+     */
+    private void initNoticeBar(List<ResponseHome.Notice> notices) {
+        mViewFlipper.setData(notices);
+        mViewFlipper.setOnItemClickListener((position, data) -> {
+            // todo 这里设置公告点击事件
+        });
     }
 
     /**
