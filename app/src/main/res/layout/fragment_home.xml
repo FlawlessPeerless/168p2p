@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,12 +15,14 @@
         android:layout_height="match_parent">
         <!--内容根布局-->
         <LinearLayout
+            android:background="#f3f3f3"
             android:id="@+id/root_layout"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <!-- 公告栏 -->
             <com.magic.szh.cnf_168p2p.ui.notice_bar.NoticeBar
+                android:background="#fff"
                 android:inAnimation="@anim/slide_in_up"
                 android:outAnimation="@anim/slide_out_up"
                 android:autoStart="true"
@@ -29,6 +30,125 @@
                 android:id="@+id/view_flipper_notice_bar"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"/>
+            <View style="@style/DividerVertical"/>
+            <!-- 平台数据栏 -->
+            <LinearLayout
+                android:background="#fff"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.AppCompatButton
+                    style="@style/PlatformIcon"
+                    android:id="@+id/platform_icon"
+                    android:drawablePadding="6dp"
+                    android:drawableTop="@drawable/home_platform"
+                    android:text="平台数据" />
+                <android.support.v7.widget.AppCompatButton
+                    style="@style/PlatformIcon"
+                    android:id="@+id/invite_icon"
+                    android:drawablePadding="6dp"
+                    android:drawableTop="@drawable/home_invited"
+                    android:text="邀请有礼" />
+                <android.support.v7.widget.AppCompatButton
+                    style="@style/PlatformIcon"
+                    android:id="@+id/activity_icon"
+                    android:drawablePadding="6dp"
+                    android:drawableTop="@drawable/home_activity"
+                    android:text="活动广场" />
+                <android.support.v7.widget.AppCompatButton
+                    style="@style/PlatformIcon"
+                    android:id="@+id/helper_icon"
+                    android:drawablePadding="6dp"
+                    android:drawableTop="@drawable/home_helper"
+                    android:text="使用攻略" />
+            </LinearLayout>
+            <!-- 新手专区 -->
+            <LinearLayout
+                android:id="@+id/novice_area"
+                android:background="#fff"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/HomeCommonTitle"
+                        android:text="新手专区" />
+                    <android.support.v7.widget.AppCompatTextView
+                        android:text="多重福利 轻松投资"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginStart="6dp"
+                        android:textColor="#999"
+                        android:textSize="12sp"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+                    <android.support.v7.widget.AppCompatImageView
+                        android:src="@drawable/investment_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View style="@style/DividerVertical"/>
+                <android.support.v7.widget.AppCompatImageView
+                    android:src="@drawable/home_novice"
+                    android:scaleType="fitCenter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View style="@style/DividerVertical"/>
+            <!-- 组队理财 + 联盟计划 -->
+            <LinearLayout
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!-- 组队理财 -->
+                <LinearLayout
+                    android:id="@+id/team_area"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/HomeCommonTitle"
+                        android:text="组队理财" />
+                    <android.support.v7.widget.AppCompatImageView
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:src="@drawable/home_team"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View style="@style/DividerHorizontal"/>
+                <!-- 联盟计划 -->
+                <LinearLayout
+                    android:id="@+id/alliance_area"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/HomeCommonTitle"
+                        android:text="联盟计划" />
+                    <android.support.v7.widget.AppCompatImageView
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:src="@drawable/home_alliance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 数据展示栏 -->
+
         </LinearLayout>
     </ScrollView>
 

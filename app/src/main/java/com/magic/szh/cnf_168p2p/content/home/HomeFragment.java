@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * project: CNF_168p2p
@@ -101,16 +102,23 @@ public class HomeFragment extends MagicFragment implements OnItemClickListener {
         RestClient.builder()
                 .url(Api.GET_MAIN_HOME)
                 .success(response -> {
-                    Log.e("HOME", response);
                     ResponseHome responseHome = ResponseHome.getInstance(response);
                     if (responseHome.getCode() == 200) {
                         Toast.makeText(getActivity(), responseHome.getMsg(), Toast.LENGTH_SHORT)
                                 .show();
                         initNoticeBar(responseHome.noticeList);
+                        initPlatformData(responseHome.layoutList.data);
                     }
                 })
                 .build()
                 .get();
+//        RestClient.builder()
+//                .url()
+//                .success(response -> {
+//
+//                })
+//                .build()
+//                .get();
     }
 
     /**
@@ -118,10 +126,20 @@ public class HomeFragment extends MagicFragment implements OnItemClickListener {
      * @param notices 公告栏数据
      */
     private void initNoticeBar(List<ResponseHome.Notice> notices) {
+        if (notices == null) return;
         mViewFlipper.setData(notices);
         mViewFlipper.setOnItemClickListener((position, data) -> {
             // todo 这里设置公告点击事件
         });
+    }
+
+    /**
+     * 初始化平台数据
+     * @param data 平台数据
+     */
+    private void initPlatformData(List<ResponseHome.Data> data) {
+        if (data == null) return;
+
     }
 
     /**
@@ -132,5 +150,29 @@ public class HomeFragment extends MagicFragment implements OnItemClickListener {
         Toast
             .makeText(getActivity(), BANNERS.get(position).name, Toast.LENGTH_SHORT)
             .show();
+    }
+
+    /**
+     * 新手专区点击跳转
+     */
+    @OnClick(R.id.novice_area)
+    void noviceAreaOnClick() {
+        // todo 新手专区点击跳转
+    }
+
+    /**
+     * 组队理财跳转
+     */
+    @OnClick(R.id.team_area)
+    void teamAreaOnClick() {
+        // todo 组队理财跳转
+    }
+
+    /**
+     * 联盟计划跳转
+     */
+    @OnClick(R.id.alliance_area)
+    void allianceAreaOnClick() {
+        // todo 联盟计划跳转
     }
 }

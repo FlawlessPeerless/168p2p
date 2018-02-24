@@ -40,6 +40,7 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         mViewPager.setAdapter(new HomePagerAdapter(getSupportFragmentManager()));
+        mViewPager.setOffscreenPageLimit(4);
         mTabLayout.setupWithViewPager(mViewPager);
         initTabLayout();
     }

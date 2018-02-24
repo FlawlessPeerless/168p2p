@@ -8,4 +8,42 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <!-- home 平台数据按钮通用样式 -->
+    <style name="PlatformIcon">
+        <item name="android:background">#fff</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#333</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+    <!-- home 公共 title -->
+    <style name="HomeCommonTitle">
+        <item name="android:gravity">center</item>
+        <item name="android:padding">6dp</item>
+        <item name="android:drawableLeft">@drawable/ic_home_novice</item>
+        <item name="android:drawablePadding">6dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#333</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <!-- common 分割线 vertical -->
+    <style name="DividerVertical">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">#ececec</item>
+    </style>
+
+    <!-- common 分割线 horizontal -->
+    <style name="DividerHorizontal">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">#ececec</item>
+    </style>
+
 </resources>
