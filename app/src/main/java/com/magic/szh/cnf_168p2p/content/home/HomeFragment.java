@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -46,6 +47,18 @@ public class HomeFragment extends MagicFragment implements OnItemClickListener {
     LinearLayout mContentLayout;
     @BindView(R.id.view_flipper_notice_bar)
     NoticeBar mViewFlipper;
+    @BindView(R.id.remuneration)
+    TextView mRemunerationText;
+    @BindView(R.id.remuneration_title)
+    TextView mRemunerationTitle;
+    @BindView(R.id.invest)
+    TextView mInvestText;
+    @BindView(R.id.invest_title)
+    TextView mInvestTitle;
+    @BindView(R.id.operation)
+    TextView mOperationText;
+    @BindView(R.id.operation_title)
+    TextView mOperationTitle;
 
     @Override
     public Object setLayout() {
@@ -108,6 +121,7 @@ public class HomeFragment extends MagicFragment implements OnItemClickListener {
                                 .show();
                         initNoticeBar(responseHome.noticeList);
                         initPlatformData(responseHome.layoutList.data);
+                        initFootDataBar(responseHome.layoutList.tongji);
                     }
                 })
                 .build()
@@ -119,6 +133,30 @@ public class HomeFragment extends MagicFragment implements OnItemClickListener {
 //                })
 //                .build()
 //                .get();
+    }
+
+    /**
+     * 初始化底部统计数据栏
+     * @param data 统计数据
+     */
+    private void initFootDataBar(List<ResponseHome.Stat> data) {
+        for (int i = 0; i < data.size(); i++) {
+            switch (i) {
+                case 0:
+                    mRemunerationText.setText(data.get(i).number);
+                    mRemunerationTitle.setText(data.get(i).name);
+                    break;
+                case 1:
+                    mInvestText.setText(data.get(i).number);
+                    mInvestTitle.setText(data.get(i).name);
+                    break;
+                case 2:
+                    mOperationText.setText(data.get(i).number);
+                    mOperationTitle.setText(data.get(i).name);
+                    break;
+                default:
+            }
+        }
     }
 
     /**
