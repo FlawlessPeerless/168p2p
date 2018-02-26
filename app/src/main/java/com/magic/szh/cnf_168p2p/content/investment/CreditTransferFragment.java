@@ -1,4 +1,4 @@
-package com.magic.szh.cnf_168p2p.content.home;
+package com.magic.szh.cnf_168p2p.content.investment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,17 +9,17 @@ import com.magic.szh.cnf_168p2p.base.BaseFragment;
 
 /**
  * project: CNF_168p2p
- * package: com.magic.szh.cnf_168p2p.content.home
- * file: InvestmentFragment
+ * package: com.magic.szh.cnf_168p2p.content.investment
+ * file: CreditTransferFragment
  * author: admin
- * date: 2018/2/22
- * description: 主页 - 投资tab fragment
+ * date: 2018/2/26
+ * description: Investment - 债权转让
  */
 
-public class InvestmentFragment extends BaseFragment {
+public class CreditTransferFragment extends BaseFragment {
     @Override
     public Object setLayout() {
-        return R.layout.fragment_investment;
+        return R.layout.fragment_creadit_transfer;
     }
 
     @Override

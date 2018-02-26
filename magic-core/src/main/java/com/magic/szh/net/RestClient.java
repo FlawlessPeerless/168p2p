@@ -66,7 +66,7 @@ public class RestClient {
                 call = service.post(URL, PARAMS);
                 break;
             case PUT:
-                call = service.delete(URL, PARAMS);
+                call = service.put(URL, PARAMS);
                 break;
             case DELETE:
                 call = service.delete(URL, PARAMS);

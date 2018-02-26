@@ -126,13 +126,6 @@ public class HomeFragment extends MagicFragment implements OnItemClickListener {
                 })
                 .build()
                 .get();
-//        RestClient.builder()
-//                .url()
-//                .success(response -> {
-//
-//                })
-//                .build()
-//                .get();
     }
 
     /**

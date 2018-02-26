@@ -19,4 +19,6 @@ public class Api {
     public static final String GET_MAIN_HOME_BANNER = BASE_URL + "/api/add";
     // 首页 - home
     public static final String GET_MAIN_HOME = BASE_URL + "/api/add/homepage";
+    // 首页 - investment - 定期理财列表
+    public static final String GET_MAIN_INVESTMENT_REGULAR = BASE_URL + "/borrow/borrow/getBorrowList";
 }
