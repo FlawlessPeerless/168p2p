@@ -51,5 +51,8 @@ dependencies {
         exclude group: "com.android.support"
     }
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    // SmartRefreshLayout 上拉加载 下拉刷新库
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
     compile project(path: ':magic-core')
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 }
