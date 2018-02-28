@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.magic.szh.cnf_168p2p.R;
 import com.magic.szh.cnf_168p2p.api.response.ResponseRegularInvestment;
@@ -63,7 +64,7 @@ public class RegularInvestmentFragment extends BaseFragment {
         mAdapter = new RegularInvestmentListAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRefreshLayout.setOnLoadMoreListener(new OnRefreshLoadMoreListener() {
+        mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
                 updateRegularInvestmentData(refreshLayout);
@@ -73,6 +74,7 @@ public class RegularInvestmentFragment extends BaseFragment {
                 initRegularInvestmentData(refreshLayout);
             }
         });
+        initRegularInvestmentData(mRefreshLayout);
     }
 
     /**
@@ -81,7 +83,6 @@ public class RegularInvestmentFragment extends BaseFragment {
      */
     private void initRegularInvestmentData(RefreshLayout refreshLayout) {
         mCurrentPage = 1;
-        mAdapter.clearDataItems();
         RestClient.builder()
                 .url(Api.GET_MAIN_INVESTMENT_REGULAR)
                 .params("page", mCurrentPage)
@@ -92,10 +93,13 @@ public class RegularInvestmentFragment extends BaseFragment {
                     if (json.getCode() == 200) {
                         List<ResponseRegularInvestment.SubjectPojo> newList = json.getList().getList();
                         if (newList.size() > 0) {
+                            mAdapter.clearDataItems();
                             mAdapter.addDataItems(newList);
-                            refreshLayout.finishRefresh(true);
+                            refreshLayout.finishRefresh(600);
+                            mAdapter.getSubjectPojoList();
                         } else {
                             // TODO 加载完毕
+                            Toast.makeText(getContext(), "没有数据", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
@@ -120,7 +124,8 @@ public class RegularInvestmentFragment extends BaseFragment {
                         List<ResponseRegularInvestment.SubjectPojo> newList = json.getList().getList();
                         if (newList.size() > 0) {
                             mAdapter.addDataItems(newList);
-                            refreshLayout.finishLoadMore(true);
+                            refreshLayout.finishLoadMore(600);
+                            mAdapter.getSubjectPojoList();
                         } else {
                             // TODO 加载完毕
                         }

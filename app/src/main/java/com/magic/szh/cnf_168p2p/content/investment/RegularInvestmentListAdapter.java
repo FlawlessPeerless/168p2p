@@ -26,12 +26,16 @@ import butterknife.ButterKnife;
  */
 
 public class RegularInvestmentListAdapter extends RecyclerView.Adapter<RegularInvestmentListAdapter.SubjectViewHolder> {
-    List<ResponseRegularInvestment.SubjectPojo> mSubjectPojoList;
+    private List<ResponseRegularInvestment.SubjectPojo> mSubjectPojoList;
     private final Context mContext;
 
     public RegularInvestmentListAdapter(Context context) {
         mContext = context;
         mSubjectPojoList = new ArrayList<>();
+    }
+
+    public List<ResponseRegularInvestment.SubjectPojo> getSubjectPojoList() {
+        return mSubjectPojoList;
     }
 
     public void addDataItems(List<ResponseRegularInvestment.SubjectPojo> list) {
@@ -54,6 +58,11 @@ public class RegularInvestmentListAdapter extends RecyclerView.Adapter<RegularIn
     @Override
     public void onBindViewHolder(SubjectViewHolder holder, int position) {
         holder.updateDate(mSubjectPojoList.get(position));
+    }
+
+    @Override
+    public void onViewRecycled(SubjectViewHolder holder) {
+        super.onViewRecycled(holder);
     }
 
     @Override
@@ -86,6 +95,7 @@ public class RegularInvestmentListAdapter extends RecyclerView.Adapter<RegularIn
             if (data.getExtendRate() <= 0) {
                 mSubjectApr.setVisibility(View.INVISIBLE);
             } else {
+                mSubjectApr.setVisibility(View.VISIBLE);
                 mSubjectApr.setText(String.format("+%s%%", data.getExtendRate()));
             }
             mSubjectAnnual.setText(String.format("%s%%", data.getBorrowApr()));
