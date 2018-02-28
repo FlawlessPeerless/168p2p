@@ -12,11 +12,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.magic.szh.Magic;
 import com.magic.szh.cnf_168p2p.R;
 import com.magic.szh.cnf_168p2p.base.BaseActivity;
 import com.magic.szh.cnf_168p2p.base.MagicFragment;
 import com.magic.szh.cnf_168p2p.content.home.HomeActivity;
 import com.magic.szh.cnf_168p2p.content.signup.SignUpFragment;
+import com.magic.szh.util.network.NetWorkUtil;
 import com.magic.szh.util.storage.MagicPreference;
 import com.magic.szh.util.timer.BaseTimerTask;
 import com.magic.szh.util.timer.ITimerListener;
@@ -82,6 +84,10 @@ public class LauncherFragment extends MagicFragment implements ITimerListener {
      * 判断是否首次登录
      */
     private void checkIsFirstLauncher() {
+        if (!NetWorkUtil.isNetworkConnected(getContext())) {
+            Toast.makeText(getContext(), "没有网络，请检查网络是否连接", Toast.LENGTH_LONG).show();
+            return;
+        }
         if (MagicPreference.getAppFlag(LauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
             BaseActivity activity = (BaseActivity) getActivity();
             activity.replaceFragment(R.id.layout_fragment_wrapper, new GuideFragment());
