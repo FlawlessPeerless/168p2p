@@ -5,12 +5,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.magic.szh.cnf_168p2p.R;
 import com.magic.szh.cnf_168p2p.api.response.ResponseRegularInvestment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * project: CNF_168p2p
@@ -30,14 +34,15 @@ public class RegularInvestmentListAdapter extends RecyclerView.Adapter<RegularIn
         mSubjectPojoList = new ArrayList<>();
     }
 
-    public List<ResponseRegularInvestment.SubjectPojo> getSubjectPojoList() {
-        return mSubjectPojoList;
-    }
-
     public void addDataItems(List<ResponseRegularInvestment.SubjectPojo> list) {
         int from = mSubjectPojoList.size();
         mSubjectPojoList.addAll(list);
         notifyItemRangeChanged(from, list.size());
+    }
+
+    public void clearDataItems() {
+        mSubjectPojoList.clear();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -48,7 +53,7 @@ public class RegularInvestmentListAdapter extends RecyclerView.Adapter<RegularIn
 
     @Override
     public void onBindViewHolder(SubjectViewHolder holder, int position) {
-
+        holder.updateDate(mSubjectPojoList.get(position));
     }
 
     @Override
@@ -57,9 +62,36 @@ public class RegularInvestmentListAdapter extends RecyclerView.Adapter<RegularIn
     }
 
     class SubjectViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.text_view_subject_apr)
+        TextView mSubjectApr;
+        @BindView(R.id.text_view_subject_annual_yield)
+        TextView mSubjectAnnual;
+        @BindView(R.id.text_view_subject_name)
+        TextView mSubjectName;
+        @BindView(R.id.text_investment_horizon)
+        TextView mTextInvestmentHorizon;
+        @BindView(R.id.text_financing_amount)
+        TextView mTextInvestmentFinancingAmount;
+        @BindView(R.id.text_repayment_type)
+        TextView mTextRepaymentType;
+
 
         public SubjectViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+
+        public void updateDate(ResponseRegularInvestment.SubjectPojo data) {
+            mSubjectName.setText(data.getName());
+            if (data.getExtendRate() <= 0) {
+                mSubjectApr.setVisibility(View.INVISIBLE);
+            } else {
+                mSubjectApr.setText(String.format("+%s%%", data.getExtendRate()));
+            }
+            mSubjectAnnual.setText(String.format("%s%%", data.getBorrowApr()));
+            mTextInvestmentHorizon.setText(String.format("%d个月", data.getBorrowPeriod()));
+            mTextInvestmentFinancingAmount.setText(String.format("%s万元", data.getAccount() / 10000));
+            mTextRepaymentType.setText(data.getStyleName());
         }
     }
 }

@@ -2,20 +2,18 @@ package com.magic.szh.cnf_168p2p.content.investment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.magic.szh.cnf_168p2p.R;
 import com.magic.szh.cnf_168p2p.api.response.ResponseRegularInvestment;
 import com.magic.szh.cnf_168p2p.api.url.Api;
 import com.magic.szh.cnf_168p2p.base.BaseFragment;
 import com.magic.szh.net.RestClient;
-import com.magic.szh.net.callback.IError;
-import com.magic.szh.net.callback.IFailure;
-import com.magic.szh.net.callback.ISuccess;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +52,6 @@ public class RegularInvestmentFragment extends BaseFragment {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         initLayout();
-        initRegularInvestmentData();
 
     }
 
@@ -65,23 +62,29 @@ public class RegularInvestmentFragment extends BaseFragment {
         mSubjectPojoList = new ArrayList<>();
         mAdapter = new RegularInvestmentListAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRefreshLayout.setOnLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                updateRegularInvestmentData(refreshLayout);
+            }
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                initRegularInvestmentData(refreshLayout);
+            }
+        });
     }
 
     /**
      * 初始化 定期理财 数据列表
+     * @param refreshLayout
      */
-    private void initRegularInvestmentData() {
-        updateRegularInvestmentData(mCurrentPage);
-    }
-
-    /**
-     * 更新 定期理财 数据列表
-     * @param page 当前页码
-     */
-    private void updateRegularInvestmentData(int page){
+    private void initRegularInvestmentData(RefreshLayout refreshLayout) {
+        mCurrentPage = 1;
+        mAdapter.clearDataItems();
         RestClient.builder()
                 .url(Api.GET_MAIN_INVESTMENT_REGULAR)
-                .params("page", page)
+                .params("page", mCurrentPage)
                 .params("type", "borrowList")
                 .params("logtype", "andior")
                 .success(response -> {
@@ -90,16 +93,38 @@ public class RegularInvestmentFragment extends BaseFragment {
                         List<ResponseRegularInvestment.SubjectPojo> newList = json.getList().getList();
                         if (newList.size() > 0) {
                             mAdapter.addDataItems(newList);
+                            refreshLayout.finishRefresh(true);
                         } else {
                             // TODO 加载完毕
                         }
                     }
                 })
-                .failure(t -> {
+                .build()
+                .get();
+    }
 
-                })
-                .error((code, msg) -> {
-
+    /**
+     * 更新 定期理财 数据列表
+     * @param refreshLayout 下拉刷新模块
+     */
+    private void updateRegularInvestmentData(RefreshLayout refreshLayout){
+        mCurrentPage++;
+        RestClient.builder()
+                .url(Api.GET_MAIN_INVESTMENT_REGULAR)
+                .params("page", mCurrentPage)
+                .params("type", "borrowList")
+                .params("logtype", "andior")
+                .success(response -> {
+                    ResponseRegularInvestment json = ResponseRegularInvestment.getInstance(response);
+                    if (json.getCode() == 200) {
+                        List<ResponseRegularInvestment.SubjectPojo> newList = json.getList().getList();
+                        if (newList.size() > 0) {
+                            mAdapter.addDataItems(newList);
+                            refreshLayout.finishLoadMore(true);
+                        } else {
+                            // TODO 加载完毕
+                        }
+                    }
                 })
                 .build()
                 .get();
