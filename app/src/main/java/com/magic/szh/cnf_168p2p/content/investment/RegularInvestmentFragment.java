@@ -52,7 +52,6 @@ public class RegularInvestmentFragment extends BaseFragment {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         initLayout();
-        initRegularInvestmentData(refreshLayout);
 
     }
 
