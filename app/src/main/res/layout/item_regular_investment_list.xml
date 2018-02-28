@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:divider="@drawable/divider_linearlayout_vertical"
+    android:layout_marginBottom="10dp"
+    android:background="#fff"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:divider="@drawable/divider_linearlayout_vertical"
+    android:showDividers="beginning|end|middle"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:padding="10dp"
@@ -19,16 +22,15 @@
         tools:text="车押贷" />
 
     <LinearLayout
+        android:showDividers="middle"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="342dp"
+        android:layout_height="wrap_content"
         android:divider="@drawable/divider_linearlayout_horizonal"
         android:dividerPadding="4dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_subject_name">
+        android:orientation="horizontal" android:baselineAligned="false">
 
         <!--左侧-->
         <android.support.constraint.ConstraintLayout
@@ -47,10 +49,8 @@
                 android:textColor="#fff"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toTopOf="@+id/text_view_subject_annual_yield"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
                 tools:ignore="SmallSp"
                 tools:text="+0.50%" />
 
@@ -63,7 +63,6 @@
                 android:textSize="25sp"
                 app:layout_constraintBottom_toTopOf="@+id/textView3"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.882"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="12.60%" />
 
@@ -72,31 +71,84 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#bebebe"
-                android:textSize="11sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="SmallSp"
-                tools:text="预期年化收益" />
+                android:text="预期年化收益" />
 
         </android.support.constraint.ConstraintLayout>
-        <!--中间-->
-        <android.support.constraint.ConstraintLayout
+        <!--右侧-->
+        <LinearLayout
+            android:baselineAligned="true"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent">
-            <TextView
-                android:text="投资期限"
-                android:textColor="#bebebe"
-                android:textSize="12sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                tools:text="12个月"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <!--信息栏-->
+            <RelativeLayout
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_alignParentLeft="true"
+                    style="@style/InvestmentItemLeft"
+                    android:id="@+id/text_line_one"
+                    android:text="投资期限"
+                    android:layout_alignParentStart="true" />
+                <TextView
+                    android:layout_toRightOf="@id/text_line_one"
+                    android:id="@+id/text_investment_horizon"
+                    style="@style/InvestmentItemRight"
+                    tools:text="12个月" />
 
-        </android.support.constraint.ConstraintLayout>
+                <TextView
+                    android:id="@+id/text_line_two"
+                    style="@style/InvestmentItemLeft"
+                    android:layout_marginTop="4dp"
+                    android:layout_below="@id/text_line_one"
+                    android:layout_alignParentLeft="true"
+                    android:text="融资金额" />
+                <TextView
+                    android:id="@+id/text_financing_amount"
+                    style="@style/InvestmentItemRight"
+                    android:layout_marginTop="4dp"
+                    android:layout_toRightOf="@id/text_line_two"
+                    android:layout_below="@id/text_line_one"
+                    tools:text="20万" />
+
+                <TextView
+                    android:id="@+id/text_line_three"
+                    style="@style/InvestmentItemLeft"
+                    android:layout_marginTop="4dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/text_line_two"
+                    android:text="还款方式" />
+                <TextView
+                    android:id="@+id/text_repayment_type"
+                    style="@style/InvestmentItemRight"
+                    android:layout_marginTop="4dp"
+                    android:layout_toRightOf="@id/text_line_three"
+                    android:layout_below="@id/text_line_two"
+                    tools:text="按月付息" />
+
+            </RelativeLayout>
+            <!--右侧图标-->
+            <FrameLayout
+                android:layout_marginRight="14dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="14dp">
+                <ImageView
+                    android:src="@drawable/investment_project_over_new"
+                    android:layout_width="74dp"
+                    android:layout_height="74dp" />
+            </FrameLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
