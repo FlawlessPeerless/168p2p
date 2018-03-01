@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 26
     defaultConfig {
         applicationId "com.magic.szh.cnf_168p2p"
         minSdkVersion 16
@@ -16,7 +16,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '26.0.3'
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -38,7 +38,7 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.0'
     // 字体图标 Android-iconics
     implementation 'com.mikepenz:iconics-core:3.0.3@aar'
-    implementation "com.mikepenz:iconics-views:3.0.2@aar"
+    implementation 'com.mikepenz:iconics-views:3.0.2@aar'
     // ConvenientBanner
     implementation 'com.bigkoo:convenientbanner:2.0.5'
     // Fragmentation
@@ -47,7 +47,7 @@ dependencies {
     // gson
     implementation 'com.google.code.gson:gson:2.8.2'
     // glide
-    implementation ('com.github.bumptech.glide:glide:4.6.1') {
+    implementation('com.github.bumptech.glide:glide:4.6.1') {
         exclude group: "com.android.support"
     }
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'

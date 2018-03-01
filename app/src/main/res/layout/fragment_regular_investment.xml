@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:srlAccentColor="@color/colorAccent"
-        app:srlDragRate="0.6"
-        app:srlHeaderMaxDragRate="1.6"
-        app:srlFooterMaxDragRate="1.6"
+        app:srlDragRate="0.4"
+        app:srlHeaderMaxDragRate="2"
+        app:srlFooterMaxDragRate="2"
         app:srlEnablePreviewInEditMode="true">
         <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"

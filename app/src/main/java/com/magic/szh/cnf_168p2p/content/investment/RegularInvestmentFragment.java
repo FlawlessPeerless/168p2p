@@ -31,6 +31,8 @@ import butterknife.BindView;
  */
 
 public class RegularInvestmentFragment extends BaseFragment {
+    // 当前是否在加载数据的状态
+    private boolean isLoading = false;
     // 当前请求的页码
     private int mCurrentPage = 1;
     // 标的数据实体类列表
@@ -67,10 +69,18 @@ public class RegularInvestmentFragment extends BaseFragment {
         mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
+                if (isLoading) {
+                    refreshLayout.finishLoadMore();
+                    return;
+                }
                 updateRegularInvestmentData(refreshLayout);
             }
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
+                if (isLoading) {
+                    refreshLayout.finishRefresh();
+                    return;
+                }
                 initRegularInvestmentData(refreshLayout);
             }
         });
@@ -82,6 +92,7 @@ public class RegularInvestmentFragment extends BaseFragment {
      * @param refreshLayout
      */
     private void initRegularInvestmentData(RefreshLayout refreshLayout) {
+        isLoading = true;
         mCurrentPage = 1;
         RestClient.builder()
                 .url(Api.GET_MAIN_INVESTMENT_REGULAR)
@@ -93,15 +104,14 @@ public class RegularInvestmentFragment extends BaseFragment {
                     if (json.getCode() == 200) {
                         List<ResponseRegularInvestment.SubjectPojo> newList = json.getList().getList();
                         if (newList.size() > 0) {
-                            mAdapter.clearDataItems();
-                            mAdapter.addDataItems(newList);
-                            refreshLayout.finishRefresh(600);
-                            mAdapter.getSubjectPojoList();
+                            mAdapter.initDataItems(newList);
                         } else {
-                            // TODO 加载完毕
+                            // 加载完毕
                             Toast.makeText(getContext(), "没有数据", Toast.LENGTH_SHORT).show();
                         }
                     }
+                    isLoading = false;
+                    refreshLayout.finishRefresh(true);
                 })
                 .build()
                 .get();
@@ -112,6 +122,7 @@ public class RegularInvestmentFragment extends BaseFragment {
      * @param refreshLayout 下拉刷新模块
      */
     private void updateRegularInvestmentData(RefreshLayout refreshLayout){
+        isLoading = true;
         mCurrentPage++;
         RestClient.builder()
                 .url(Api.GET_MAIN_INVESTMENT_REGULAR)
@@ -124,10 +135,10 @@ public class RegularInvestmentFragment extends BaseFragment {
                         List<ResponseRegularInvestment.SubjectPojo> newList = json.getList().getList();
                         if (newList.size() > 0) {
                             mAdapter.addDataItems(newList);
-                            refreshLayout.finishLoadMore(600);
-                            mAdapter.getSubjectPojoList();
+                            refreshLayout.finishLoadMore(true);
+                            isLoading = false;
                         } else {
-                            // TODO 加载完毕
+                            refreshLayout.finishLoadMoreWithNoMoreData();
                         }
                     }
                 })

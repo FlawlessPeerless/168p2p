@@ -29,30 +29,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@drawable/divider_linearlayout_horizonal"
-        android:dividerPadding="4dp"
         android:orientation="horizontal" android:baselineAligned="false">
 
         <!--左侧-->
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp">
+            android:gravity="left"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
 
             <TextView
                 android:id="@+id/text_view_subject_apr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
                 android:background="@drawable/bg_annual_yield_red"
-                android:gravity="center"
                 android:textColor="#fff"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toTopOf="@+id/text_view_subject_annual_yield"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SmallSp"
-                tools:text="+0.50%" />
+                android:textSize="9sp"
+                tools:text="+0.50%"
+                android:gravity="center"
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/text_view_subject_annual_yield"
@@ -61,24 +58,18 @@
                 android:layout_marginBottom="2dp"
                 android:textColor="#f65b66"
                 android:textSize="25sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 tools:text="12.60%" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="预期年化收益"
                 android:textColor="#bebebe"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="SmallSp"
-                android:text="预期年化收益" />
+                tools:ignore="SmallSp" />
 
-        </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
         <!--右侧-->
         <LinearLayout
             android:baselineAligned="true"
@@ -143,9 +134,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="14dp">
                 <ImageView
+                    android:id="@+id/icon_finish"
                     android:src="@drawable/investment_project_over_new"
                     android:layout_width="74dp"
                     android:layout_height="74dp" />
+                <com.magic.szh.cnf_168p2p.widget.CircleProgressBar
+                    android:id="@+id/circle_progress_view"
+                    android:background="@drawable/grab"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp" />
             </FrameLayout>
 
         </LinearLayout>
