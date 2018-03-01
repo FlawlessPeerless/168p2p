@@ -69,18 +69,12 @@ public class RegularInvestmentFragment extends BaseFragment {
         mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-                if (isLoading) {
-                    refreshLayout.finishLoadMore();
-                    return;
-                }
+                if (isLoading) return;
                 updateRegularInvestmentData(refreshLayout);
             }
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                if (isLoading) {
-                    refreshLayout.finishRefresh();
-                    return;
-                }
+                if (isLoading) return;
                 initRegularInvestmentData(refreshLayout);
             }
         });

@@ -105,7 +105,7 @@ public class CircleProgressBar extends View {
         drawStroke(canvas);
         if (currentProgress < progress) {
             currentProgress++;
-            postInvalidateDelayed(1);
+            postInvalidateDelayed(10);
         }
     }
 
@@ -133,6 +133,7 @@ public class CircleProgressBar extends View {
 
     public void setProgress(int progress) {
         this.progress = progress;
+        currentProgress = 0;
         invalidate();
     }
 }

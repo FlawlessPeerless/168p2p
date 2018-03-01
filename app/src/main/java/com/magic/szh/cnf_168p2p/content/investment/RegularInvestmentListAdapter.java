@@ -128,26 +128,30 @@ public class RegularInvestmentListAdapter extends RecyclerView.Adapter<RegularIn
                     // 即将开始
                 case "loan":
                     // 立即投资
-                    setTitleOverIcon(hasRedBagIcon, hasVoucherIcon);
+                    setTitleIcon(hasRedBagIcon, hasVoucherIcon);
+                    setSubjectValueStatus(true);
                     mIconFinish.setVisibility(View.GONE);
                     mCircleProgressBar.setVisibility(View.VISIBLE);
                     break;
                 case "over":
                     // 抢光了
-                    setTitleIcon(hasRedBagIcon, hasVoucherIcon);
+                    setSubjectValueStatus(false);
+                    setTitleOverIcon(hasRedBagIcon, hasVoucherIcon);
                     mIconFinish.setVisibility(View.VISIBLE);
                     mIconFinish.setBackgroundResource(R.drawable.investment_project_over_new);
                     mCircleProgressBar.setVisibility(View.GONE);
                     break;
                 case "repay_over":
                     // 已还完
-                    setTitleIcon(hasRedBagIcon, hasVoucherIcon);
+                    setSubjectValueStatus(false);
+                    setTitleOverIcon(hasRedBagIcon, hasVoucherIcon);
                     mIconFinish.setVisibility(View.GONE);
                     mCircleProgressBar.setVisibility(View.GONE);
                     break;
                 case "repay":
                     // 还款中
-                    setTitleIcon(hasRedBagIcon, hasVoucherIcon);
+                    setSubjectValueStatus(false);
+                    setTitleOverIcon(hasRedBagIcon, hasVoucherIcon);
                     mIconFinish.setVisibility(View.VISIBLE);
                     mIconFinish.setBackgroundResource(R.drawable.investment_project_repay_new);
                     mCircleProgressBar.setVisibility(View.GONE);
@@ -196,12 +200,12 @@ public class RegularInvestmentListAdapter extends RecyclerView.Adapter<RegularIn
          * @param isFinish boolean 是否完成
          */
         private void setSubjectValueStatus(boolean isFinish) {
-            if (isFinish) {
+            if (!isFinish) {
                 mSubjectApr.setBackgroundResource(R.drawable.bg_annual_yield_gray);
-                mSubjectAnnual.setTextColor(Color.parseColor("#f65b66"));
+                mSubjectAnnual.setTextColor(Color.parseColor("#333333"));
             } else {
                 mSubjectApr.setBackgroundResource(R.drawable.bg_annual_yield_red);
-                mSubjectAnnual.setTextColor(Color.parseColor("#333333"));
+                mSubjectAnnual.setTextColor(Color.parseColor("#f65b66"));
             }
         }
     }
