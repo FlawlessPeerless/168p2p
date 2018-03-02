@@ -1,11 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
         android:text="更多"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:background="#eaeaea"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- 168理财介绍 -->
+            <TextView
+                android:layout_marginTop="10dp"
+                style="@style/MoreButton"
+                android:drawableLeft="@drawable/more_icon_about"
+                android:drawableStart="@drawable/more_icon_about"
+                android:text="168理财介绍"
+                android:id="@+id/button_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <!-- 存管银行介绍 -->
+            <TextView
+                android:layout_marginTop="10dp"
+                style="@style/MoreButton"
+                android:text="向朋友推荐168理财"
+                android:drawableLeft="@drawable/more_icon_share_168"
+                android:drawableStart="@drawable/more_icon_share_168"
+                android:id="@+id/button_intro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="1dp"
+                style="@style/MoreButton"
+                android:text="意见反馈"
+                android:drawableLeft="@drawable/more_icon_feedback"
+                android:drawableStart="@drawable/more_icon_feedback"
+                android:id="@+id/button_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/button_quit"
+                android:layout_margin="30dp"
+                android:background="@drawable/button_background"
+                android:text="退出"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            </LinearLayout>
+            <!-- 联系方式 -->
+            <RelativeLayout
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_centerVertical="true"
+                    android:background="#b3b3b3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:background="#eaeaea"
+                    android:textSize="12sp"
+                    android:padding="10dp"
+                    android:text="联系方式"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <!-- 联系按钮组 -->
+            <LinearLayout
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/button_contact_wechat"
+                    android:gravity="center"
+                    android:drawableTop="@drawable/icon_contact_information_weixin"
+                    android:text="微信公众号"
+                    android:textColor="#4d4d4d"
+                    android:drawablePadding="10dp"
+                    android:textSize="12sp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/button_contact_qq"
+                    android:gravity="center"
+                    android:drawableTop="@drawable/icon_contact_information_qq"
+                    android:text="微信公众号"
+                    android:textColor="#4d4d4d"
+                    android:drawablePadding="10dp"
+                    android:textSize="12sp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/button_contact_tel"
+                    android:gravity="center"
+                    android:drawableTop="@drawable/icon_contact_information_customer_service"
+                    android:text="微信公众号"
+                    android:textColor="#4d4d4d"
+                    android:drawablePadding="10dp"
+                    android:textSize="12sp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- footer -->
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    tools:text="168理财v1.0.0"
+                    android:textSize="12sp"
+                    android:textColor="#999"
+                    android:id="@+id/text_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textSize="12sp"
+                    android:textColor="#999999"
+                    android:layout_marginTop="6dp"
+                    android:text="工信部互联网百强企业“ 中金在线 ”旗下"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

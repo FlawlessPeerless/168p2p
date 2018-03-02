@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.magic.szh.cnf_168p2p.base.BaseFragment;
 import com.magic.szh.cnf_168p2p.content.investment.InvestmentFragment;
+import com.magic.szh.cnf_168p2p.content.more.MoreFragment;
 
 import java.util.ArrayList;
 import java.util.List;
