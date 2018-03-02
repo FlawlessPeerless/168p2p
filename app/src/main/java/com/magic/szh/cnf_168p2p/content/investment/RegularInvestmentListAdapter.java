@@ -37,10 +37,6 @@ public class RegularInvestmentListAdapter extends RecyclerView.Adapter<RegularIn
         mSubjectPojoList = new ArrayList<>();
     }
 
-    public List<ResponseRegularInvestment.SubjectPojo> getSubjectPojoList() {
-        return mSubjectPojoList;
-    }
-
     public void addDataItems(List<ResponseRegularInvestment.SubjectPojo> list) {
         int from = mSubjectPojoList.size();
         mSubjectPojoList.addAll(list);

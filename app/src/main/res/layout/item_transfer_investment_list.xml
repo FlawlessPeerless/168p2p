@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_marginBottom="10dp"
+    android:background="#fff"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:divider="@drawable/divider_linearlayout_vertical"
+    android:showDividers="beginning|end|middle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:drawablePadding="6dp"
+        android:padding="10dp"
+        android:id="@+id/text_view_subject_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="#333"
+        android:textSize="15sp"
+        tools:text="车押贷" />
+
+    <LinearLayout
+        android:showDividers="middle"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_linearlayout_horizonal"
+        android:orientation="horizontal" android:baselineAligned="false">
+
+        <!--左侧-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+            <!--<TextView-->
+                <!--android:id="@+id/text_view_subject_apr"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/bg_annual_yield_red"-->
+                <!--android:textColor="#fff"-->
+                <!--android:textSize="9sp"-->
+                <!--tools:text="+0.50%"-->
+                <!--android:gravity="center"-->
+                <!--tools:ignore="SmallSp" />-->
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:id="@+id/text_view_subject_annual_yield"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="2dp"
+                android:textColor="#f65b66"
+                android:textSize="25sp"
+                tools:text="12.60%" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="预期年化收益"
+                android:textColor="#bebebe"
+                android:textSize="12sp"
+                tools:ignore="SmallSp" />
+
+        </LinearLayout>
+        <!--右侧-->
+        <LinearLayout
+            android:baselineAligned="true"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <!--信息栏-->
+            <RelativeLayout
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_alignParentLeft="true"
+                    style="@style/InvestmentItemLeft"
+                    android:id="@+id/text_line_one"
+                    android:text="债务总额"
+                    android:layout_alignParentStart="true" />
+                <TextView
+                    android:layout_toRightOf="@id/text_line_one"
+                    android:id="@+id/text_investment_horizon"
+                    style="@style/InvestmentItemRight"
+                    tools:text="12个月" />
+
+                <TextView
+                    android:id="@+id/text_line_two"
+                    style="@style/InvestmentItemLeft"
+                    android:layout_marginTop="4dp"
+                    android:layout_below="@id/text_line_one"
+                    android:layout_alignParentLeft="true"
+                    android:text="剩余期限" />
+                <TextView
+                    android:id="@+id/text_financing_amount"
+                    style="@style/InvestmentItemRight"
+                    android:layout_marginTop="4dp"
+                    android:layout_toRightOf="@id/text_line_two"
+                    android:layout_below="@id/text_line_one"
+                    tools:text="20个月" />
+
+                <TextView
+                    android:id="@+id/text_line_three"
+                    style="@style/InvestmentItemLeft"
+                    android:layout_marginTop="4dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/text_line_two"
+                    android:text="可投金额" />
+                <TextView
+                    android:id="@+id/text_repayment_type"
+                    style="@style/InvestmentItemRight"
+                    android:layout_marginTop="4dp"
+                    android:layout_toRightOf="@id/text_line_three"
+                    android:layout_below="@id/text_line_two"
+                    tools:text="2,439.84元" />
+
+            </RelativeLayout>
+            <!--右侧图标-->
+            <FrameLayout
+                android:layout_marginRight="14dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="14dp">
+                <ImageView
+                    android:id="@+id/icon_finish"
+                    android:src="@drawable/investment_project_repay_transferred"
+                    android:layout_width="74dp"
+                    android:layout_height="74dp" />
+                <com.magic.szh.cnf_168p2p.widget.CircleProgressBar
+                    android:id="@+id/circle_progress_view"
+                    android:background="@drawable/grab"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

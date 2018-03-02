@@ -21,4 +21,6 @@ public class Api {
     public static final String GET_MAIN_HOME = BASE_URL + "/api/add/homepage";
     // 首页 - investment - 定期理财列表
     public static final String GET_MAIN_INVESTMENT_REGULAR = BASE_URL + "/borrow/borrow/getBorrowList";
+    // 首页 - investment - 债权转让列表
+    public static final String GET_MAIN_INVESTMENT_TRANSFER = BASE_URL + "/borrow/borrow/zhaiquanList";
 }

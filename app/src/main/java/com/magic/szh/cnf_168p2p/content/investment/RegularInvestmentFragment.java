@@ -86,6 +86,7 @@ public class RegularInvestmentFragment extends BaseFragment {
      * @param refreshLayout
      */
     private void initRegularInvestmentData(RefreshLayout refreshLayout) {
+        refreshLayout.setNoMoreData(false);
         isLoading = true;
         mCurrentPage = 1;
         RestClient.builder()
@@ -94,6 +95,7 @@ public class RegularInvestmentFragment extends BaseFragment {
                 .params("type", "borrowList")
                 .params("logtype", "andior")
                 .success(response -> {
+                    isLoading = false;
                     ResponseRegularInvestment json = ResponseRegularInvestment.getInstance(response);
                     if (json.getCode() == 200) {
                         List<ResponseRegularInvestment.SubjectPojo> newList = json.getList().getList();
@@ -103,9 +105,10 @@ public class RegularInvestmentFragment extends BaseFragment {
                             // 加载完毕
                             Toast.makeText(getContext(), "没有数据", Toast.LENGTH_SHORT).show();
                         }
+                        refreshLayout.finishRefresh(true);
+                    } else {
+                        refreshLayout.finishRefresh(false);
                     }
-                    isLoading = false;
-                    refreshLayout.finishRefresh(true);
                 })
                 .build()
                 .get();
@@ -124,16 +127,18 @@ public class RegularInvestmentFragment extends BaseFragment {
                 .params("type", "borrowList")
                 .params("logtype", "andior")
                 .success(response -> {
+                    isLoading = false;
                     ResponseRegularInvestment json = ResponseRegularInvestment.getInstance(response);
                     if (json.getCode() == 200) {
                         List<ResponseRegularInvestment.SubjectPojo> newList = json.getList().getList();
                         if (newList.size() > 0) {
                             mAdapter.addDataItems(newList);
                             refreshLayout.finishLoadMore(true);
-                            isLoading = false;
                         } else {
                             refreshLayout.finishLoadMoreWithNoMoreData();
                         }
+                    } else {
+                        refreshLayout.finishLoadMore(false);
                     }
                 })
                 .build()
