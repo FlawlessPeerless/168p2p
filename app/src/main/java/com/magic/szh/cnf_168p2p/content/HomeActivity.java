@@ -1,21 +1,22 @@
-package com.magic.szh.cnf_168p2p.content.home;
+package com.magic.szh.cnf_168p2p.content;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.magic.szh.Magic;
 import com.magic.szh.cnf_168p2p.R;
 import com.magic.szh.cnf_168p2p.base.BaseActivity;
-import com.magic.szh.cnf_168p2p.base.MagicFragment;
+import com.magic.szh.cnf_168p2p.content.login.LoginActivity;
+import com.magic.szh.cnf_168p2p.shared_preference.Constant;
 import com.magic.szh.cnf_168p2p.ui.CustomViewPager;
+import com.magic.szh.util.storage.MagicPreference;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,6 +43,29 @@ public class HomeActivity extends BaseActivity {
         mViewPager.setAdapter(new HomePagerAdapter(getSupportFragmentManager()));
         mViewPager.setOffscreenPageLimit(4);
         mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                if (position == 2 || position == 3) {
+                    boolean isLogin = checkLoginState();
+                    if (isLogin) {
+
+                    } else {
+                        LoginActivity
+                                .startLoginActivity(HomeActivity.this);
+                    }
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
         initTabLayout();
     }
 
@@ -93,6 +117,15 @@ public class HomeActivity extends BaseActivity {
         ImageView imageView = newTab.findViewById(R.id.image_view_icon);
         imageView.setImageResource(iconId);
         return newTab;
+    }
+
+    /**
+     * 检查当前用户登录状态
+     * @return boolean True 已登录 / False 未登录
+     */
+    private boolean checkLoginState() {
+        return !TextUtils.isEmpty(MagicPreference.getString(Constant.SESSION_ID, null))
+                && MagicPreference.getBoolean(Constant.USER_PHONE_BINDING, false);
     }
 
 }

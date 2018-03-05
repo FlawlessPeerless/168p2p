@@ -4,17 +4,13 @@ package com.magic.szh.cnf_168p2p.content.launcher;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.magic.szh.cnf_168p2p.R;
 import com.magic.szh.cnf_168p2p.base.MagicFragment;
-import com.magic.szh.cnf_168p2p.content.home.HomeActivity;
+import com.magic.szh.cnf_168p2p.content.HomeActivity;
 import com.magic.szh.util.storage.MagicPreference;
 
 import java.util.ArrayList;

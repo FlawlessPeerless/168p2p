@@ -79,4 +79,28 @@ public final class MagicPreference {
     public static String getCustomAppProfile(String key) {
         return getAppPreference().getString(key, "");
     }
+
+    public static void putBoolean(String key, boolean value) {
+        getAppPreference()
+                .edit()
+                .putBoolean(key, value)
+                .apply();
+    }
+
+    public static boolean getBoolean(String key, boolean defValue) {
+        return getAppPreference()
+                .getBoolean(key, defValue);
+    }
+
+    public static void putString(String key, String value) {
+        getAppPreference()
+                .edit()
+                .putString(key, value)
+                .apply();
+    }
+
+    public static String getString(String key, String defValue) {
+        return getAppPreference()
+                .getString(key, defValue);
+    }
 }
