@@ -27,7 +27,7 @@ public class TokenInterceptor implements Interceptor {
             return chain.proceed(chain.request());
         }
         Request authorised = chain.request().newBuilder()
-                .header("Cookie", "PHPSESSID=" +MagicPreference.getCustomAppProfile("session_id"))
+                .header("Cookie", "PHPSESSID=" + MagicPreference.getString("session_id", ""))
                 .removeHeader("User-Agent")
                 .addHeader("User-Agent",System.getProperty("http.agent"))
                 .build();

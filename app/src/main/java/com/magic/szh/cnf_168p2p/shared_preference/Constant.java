@@ -24,4 +24,9 @@ public class Constant {
      * 最近一次用户登录的用户名（默认是手机号码）
      */
     public static final String USER_USER_NAME = "user_user_name";
+
+    /**
+     * 用户最近一次登录时间（String 毫秒）
+     */
+    public static final String USER_LOGIN_DATE = "user_login_date";
 }

@@ -1,6 +1,7 @@
 package com.magic.szh.cnf_168p2p.content.login;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.telephony.PhoneNumberFormattingTextWatcher;
@@ -14,9 +15,16 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.magic.szh.Magic;
 import com.magic.szh.cnf_168p2p.R;
+import com.magic.szh.cnf_168p2p.api.response.ResponseLoginByPhone;
+import com.magic.szh.cnf_168p2p.api.response.ResponseUserInfo;
+import com.magic.szh.cnf_168p2p.api.url.Api;
 import com.magic.szh.cnf_168p2p.base.BaseFragment;
+import com.magic.szh.cnf_168p2p.content.HomeActivity;
 import com.magic.szh.cnf_168p2p.shared_preference.Constant;
+import com.magic.szh.net.RestClient;
+import com.magic.szh.net.callback.ISuccess;
 import com.magic.szh.util.storage.MagicPreference;
 
 import butterknife.BindView;
@@ -38,6 +46,10 @@ public class LoginPhoneFragment extends BaseFragment {
     TextInputEditText mEditPhone;
     @BindView(R.id.edit_password)
     TextInputEditText mEditPassword;
+    /**
+     * 入口点标识码{@link LoginActivity}
+     */
+    private int mLoginEntrance;
 
     @Override
     public Object setLayout() {
@@ -46,7 +58,15 @@ public class LoginPhoneFragment extends BaseFragment {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
+        initData();
         initLayout();
+    }
+
+    /**
+     * 初始化数据参数
+     */
+    private void initData() {
+        mLoginEntrance = getArguments().getInt(LoginActivity.KEY_LOGIN_ENTRANCE, 0);
     }
 
     /**
@@ -82,6 +102,7 @@ public class LoginPhoneFragment extends BaseFragment {
                 }
             }
         });
+
     }
 
     /**
@@ -128,7 +149,40 @@ public class LoginPhoneFragment extends BaseFragment {
      * @param password 密码
      */
     private void startSignUp(String phone, String password) {
-        Toast.makeText(getContext(), "登录", Toast.LENGTH_SHORT).show();
+        RestClient.builder()
+                .url(Api.POST_LOGIN_BY_PHONE_NUMBER)
+                .params("phone", phone)
+                .params("password", password)
+                .success(response -> {
+                    ResponseLoginByPhone json = ResponseLoginByPhone.getInstance(response);
+                    if (json.getCode() == 200) {
+                        // TODO 成功跳转
+                        MagicPreference.putString(Constant.SESSION_ID, json.getSessionId());
+                        MagicPreference.putBoolean(Constant.USER_PHONE_BINDING, true);
+                        MagicPreference.putLong(Constant.USER_LOGIN_DATE, System.currentTimeMillis());
+                        // 获取用户信息
+                        getUserInfo();
+
+                    } else {
+                        Toast.makeText(getContext(), json.getMsg(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .build()
+                .post();
+    }
+
+    /**
+     * 请求用户信息
+     */
+    private void getUserInfo() {
+        RestClient.builder()
+                .url(Api.GET_USER_INFORMATION)
+                .success(response -> {
+                    ResponseUserInfo json = ResponseUserInfo.getInstance(response);
+                    redirect(mLoginEntrance);
+                })
+                .build()
+                .get();
     }
 
     /**
@@ -171,11 +225,36 @@ public class LoginPhoneFragment extends BaseFragment {
                 .append(string.substring(3));
         if (string.length() > 7)
             phoneBuilder
-            .append(string.subSequence(0, 3))
-            .append("-")
-            .append(string.substring(3, 7))
-            .append("-")
-            .append(string.substring(7));
+                .append(string.subSequence(0, 3))
+                .append("-")
+                .append(string.substring(3, 7))
+                .append("-")
+                .append(string.substring(7));
         return phoneBuilder.toString();
+    }
+
+    /**
+     * 重定向至指定页面
+     */
+    private void redirect(int entrance) {
+        int homeModuleCurrentPage;
+        switch (entrance) {
+            case LoginActivity.TYPE_INVESTMENT:
+                homeModuleCurrentPage = HomeActivity.TAB_INVESTMENT;
+                break;
+            case LoginActivity.TYPE_ACCOUNT:
+                homeModuleCurrentPage = HomeActivity.TAB_ACCOUNT;
+                break;
+            case LoginActivity.TYPE_FORUM:
+                homeModuleCurrentPage = HomeActivity.TAB_FORUM;
+                break;
+            case LoginActivity.TYPE_MORE:
+                homeModuleCurrentPage = HomeActivity.TAB_MORE;
+                break;
+            case LoginActivity.TYPE_LAUNCHER:
+            default:
+                homeModuleCurrentPage = HomeActivity.TAB_HOME;
+        }
+        HomeActivity.startHomeActivity(getContext(), homeModuleCurrentPage);
     }
 }

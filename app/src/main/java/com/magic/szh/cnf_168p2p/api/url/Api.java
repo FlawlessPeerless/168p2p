@@ -23,4 +23,8 @@ public class Api {
     public static final String GET_MAIN_INVESTMENT_REGULAR = BASE_URL + "/borrow/borrow/getBorrowList";
     // 首页 - investment - 债权转让列表
     public static final String GET_MAIN_INVESTMENT_TRANSFER = BASE_URL + "/borrow/borrow/zhaiquanList";
+    // 登录 - 手机登录
+    public static final String POST_LOGIN_BY_PHONE_NUMBER = BASE_URL + "/login/login?type=phoneBack";
+    // 登录 - 获取用户信息
+    public static final String GET_USER_INFORMATION = BASE_URL + "/account/account/getUserInfo?logtype=android";
 }

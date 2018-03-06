@@ -26,4 +26,11 @@ public class AccountFragment extends BaseFragment {
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
 
     }
+
+    /**
+     * 加载数据
+     */
+    public void loadData() {
+
+    }
 }

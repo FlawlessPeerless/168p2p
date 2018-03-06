@@ -20,30 +20,36 @@ import com.magic.szh.cnf_168p2p.base.BaseFragment;
  */
 
 public class LoginActivity extends BaseActivity {
-    public static final int TYPE_PHONE = 0;
-    public static final int TYPE_WECHAT = 1;
-    public static final int TYPE_QQ = 2;
-    public static final int TYPE_WEIBO = 3;
-    public static final int TYPE_CNF = 4;
+    /**
+     *  入口点 键
+     */
+    public static final String KEY_LOGIN_ENTRANCE = "login_entrance";
+    /**
+     * 入口点 值 [0.启动页 1.投资列表 2.个人中心 3.论坛 4.更多]
+     */
+    public static final int TYPE_LAUNCHER = 0;
+    public static final int TYPE_INVESTMENT = 1;
+    public static final int TYPE_ACCOUNT = 2;
+    public static final int TYPE_FORUM = 3;
+    public static final int TYPE_MORE = 4;
 
     /**
-     * 启动登录
+     * 启动登录 带参（入口点信息）
      * @param context 上下文
-     * @param type 登录方式
+     * @param type 登录入口点
      */
     public static void startLoginActivity(Context context, int type) {
         Intent intent = new Intent(context, LoginActivity.class);
-        intent.putExtra("type", type);
+        intent.putExtra(KEY_LOGIN_ENTRANCE, type);
         context.startActivity(intent);
     }
 
     /**
-     * 启动登录
+     * 启动登录 (默认启动页登录)
      * @param context 上下文
      */
     public static void startLoginActivity(Context context) {
-        Intent intent = new Intent(context, LoginActivity.class);
-        context.startActivity(intent);
+        LoginActivity.startLoginActivity(context, 0);
     }
 
     @Override
@@ -56,7 +62,11 @@ public class LoginActivity extends BaseActivity {
      * 初始化登录类型对应布局
      */
     private void initLoginLayout() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(KEY_LOGIN_ENTRANCE, getIntent().getIntExtra(KEY_LOGIN_ENTRANCE, 0));
         BaseFragment loginByPhoneFragment = new LoginPhoneFragment();
+        // 设置参数
+        loginByPhoneFragment.setArguments(bundle);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager
                 .beginTransaction()

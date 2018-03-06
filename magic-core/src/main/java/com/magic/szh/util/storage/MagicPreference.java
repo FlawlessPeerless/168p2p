@@ -103,4 +103,16 @@ public final class MagicPreference {
         return getAppPreference()
                 .getString(key, defValue);
     }
+
+    public static long getLong(String key, long defValue) {
+        return getAppPreference()
+                .getLong(key, defValue);
+    }
+
+    public static void putLong(String key, long value) {
+        getAppPreference()
+                .edit()
+                .putLong(key, value)
+                .apply();
+    }
 }
