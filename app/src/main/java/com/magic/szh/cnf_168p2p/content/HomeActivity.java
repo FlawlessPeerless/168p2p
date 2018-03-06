@@ -9,7 +9,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +28,8 @@ import com.magic.szh.util.storage.MagicPreference;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 
 /**
  * project: CNF_168p2p
@@ -48,9 +53,22 @@ public class HomeActivity extends BaseActivity {
 
     @BindView(R.id.view_pager)
     CustomViewPager mViewPager;
-    @BindView(R.id.tab_layout)
-    TabLayout mTabLayout;
+    @BindView(R.id.radio_group)
+    RadioGroup mRadioGroup;
+    @BindView(R.id.button_home)
+    RadioButton mButtonHome;
+    @BindView(R.id.button_investment)
+    RadioButton mButtonInvestment;
+    @BindView(R.id.button_account)
+    RadioButton mButtonAccount;
+    @BindView(R.id.button_forum)
+    RadioButton mButtonForum;
+    @BindView(R.id.button_more)
+    RadioButton mButtonMore;
+
     private HomePagerAdapter mAdapter;
+
+    private int mCurrentPage = R.id.button_home;
 
     /**
      * 切换至主页模块
@@ -82,77 +100,45 @@ public class HomeActivity extends BaseActivity {
         mAdapter = new HomePagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOffscreenPageLimit(4);
-        mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                int pos = tab.getPosition();
-                if (pos == 2) {
+        initTabFooter();
+    }
 
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
+    /**
+     * 初始化底部footer
+     */
+    private void initTabFooter() {
+        mRadioGroup.check(R.id.button_home);
+        mRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            switch (checkedId) {
+                case R.id.button_home:
+                    tabSelected(TAB_HOME);
+                    break;
+                case R.id.button_investment:
+                    tabSelected(TAB_INVESTMENT);
+                    break;
+                case R.id.button_account:
+                    if (checkLoginState()) {
+                        tabSelected(TAB_ACCOUNT);
+                    } else {
+                        group.check(mCurrentPage);
+                        LoginActivity.startLoginActivity(HomeActivity.this, LoginActivity.TYPE_ACCOUNT);
+                    }
+                    break;
+                case R.id.button_forum:
+                    if (checkLoginState()) {
+                        tabSelected(TAB_FORUM);
+                    } else {
+                        group.check(mCurrentPage);
+                        LoginActivity.startLoginActivity(HomeActivity.this, LoginActivity.TYPE_FORUM);
+                    }
+                    break;
+                case R.id.button_more:
+                    tabSelected(TAB_MORE);
+                    break;
             }
         });
-        initTabLayout();
     }
 
-    /**
-     * 初始化tab layout布局
-     */
-    private void initTabLayout() {
-        int count = mTabLayout.getTabCount();
-        for (int i = 0; i < count; i++) {
-            int drawable = 0;
-            String name = "";
-            switch (i) {
-                case 0:
-                    name = "首页";
-                    drawable = R.drawable.selector_home_tab_work;
-                    break;
-                case 1:
-                    name = "理财";
-                    drawable = R.drawable.selector_home_tab_discovery;
-                    break;
-                case 2:
-                    name = "账户";
-                    drawable = R.drawable.selector_home_tab_mine;
-                    break;
-                case 3:
-                    name = "社区";
-                    drawable = R.drawable.selector_home_tab_forum;
-                    break;
-                case 4:
-                    name = "更多";
-                    drawable = R.drawable.selector_home_tab_more;
-                    break;
-            }
-            mTabLayout.getTabAt(i).setCustomView(tabCreator(name, drawable));
-        }
-    }
-
-    /**
-     * 构建自定义 home tab
-     * @param name tab 名
-     * @param iconId tab 图标id
-     * @return view 返回视图
-     */
-    private View tabCreator(String name, int iconId) {
-        View newTab = LayoutInflater.from(this).inflate(R.layout.tab_home_view, null, false);
-        TextView textView = newTab.findViewById(R.id.text_view_title);
-        textView.setText(name);
-        ImageView imageView = newTab.findViewById(R.id.image_view_icon);
-        imageView.setImageResource(iconId);
-        return newTab;
-    }
 
     /**
      * 检查当前用户登录状态
@@ -169,60 +155,48 @@ public class HomeActivity extends BaseActivity {
      */
     private void getBackHome(Bundle bundle) {
         int currentPage = bundle.getInt(KEY_CURRENT_PAGE);
-        mViewPager.setCurrentItem(currentPage);
-        if (currentPage == TAB_ACCOUNT) {
-            // 直接启动个人中心
-            AccountFragment accountFragment = (AccountFragment) mAdapter.getItem(TAB_ACCOUNT);
-            accountFragment.loadData();
-        } else if (currentPage == TAB_FORUM) {
-            // 直接启动论坛
-            ForumFragment forumFragment = (ForumFragment) mAdapter.getItem(TAB_FORUM);
-            forumFragment.loadData();
+        tabSelected(currentPage);
+        switch (currentPage) {
+            case TAB_ACCOUNT:
+                AccountFragment accountFragment = (AccountFragment) mAdapter.getItem(TAB_ACCOUNT);
+                accountFragment.loadData();
+                break;
+            case TAB_FORUM:
+                ForumFragment forumFragment = (ForumFragment) mAdapter.getItem(TAB_FORUM);
+                forumFragment.loadData();
+                break;
         }
     }
 
     /**
-     * 自定义tab点击事件
+     * 切换对应的tab
+     * @param tab {@link HomeActivity}
      */
-    private View.OnClickListener mTabOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            int pos = (int) v.getTag();
-            if (pos == 2) {
-                Toast.makeText(HomeActivity.this, "111", Toast.LENGTH_SHORT).show();
-            } else {
-                TabLayout.Tab tab = mTabLayout.getTabAt(pos);
-                if (tab != null) {
-                    tab.select();
-                    mViewPager.setCurrentItem(pos);
-                }
-            }
+    private void tabSelected(int tab) {
+        // 先检查是否登录
+        switch (tab) {
+            case TAB_HOME:
+                mViewPager.setCurrentItem(0);
+                mCurrentPage = R.id.button_home;
+                break;
+            case TAB_INVESTMENT:
+                mViewPager.setCurrentItem(1);
+                mCurrentPage = R.id.button_investment;
+                break;
+            case TAB_ACCOUNT:
+                mViewPager.setCurrentItem(2);
+                mCurrentPage = R.id.button_account;
+                break;
+            case TAB_FORUM:
+                mViewPager.setCurrentItem(3);
+                mCurrentPage = R.id.button_forum;
+                break;
+            case TAB_MORE:
+                mViewPager.setCurrentItem(4);
+                mCurrentPage = R.id.button_more;
+                break;
         }
-    };
-
-    private boolean onTabSelected(int pos) {
-        boolean isLogin = false;
-        if (pos == 2 || pos == 3) {
-            //checkLoginState();
-            if (false) {
-              isLogin = true;
-            } else {
-                int loginType;
-                switch (pos) {
-                    case 2:
-                        loginType = LoginActivity.TYPE_ACCOUNT;
-                        break;
-                    case 3:
-                        loginType = LoginActivity.TYPE_FORUM;
-                        break;
-                    default:
-                        loginType = LoginActivity.TYPE_LAUNCHER;
-                }
-                LoginActivity
-                        .startLoginActivity(HomeActivity.this, loginType);
-            }
-        }
-        return isLogin;
+        mRadioGroup.check(mCurrentPage);
     }
 
 }
