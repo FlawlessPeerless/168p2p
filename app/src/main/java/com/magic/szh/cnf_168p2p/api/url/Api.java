@@ -27,4 +27,6 @@ public class Api {
     public static final String POST_LOGIN_BY_PHONE_NUMBER = BASE_URL + "/login/login?type=phoneBack";
     // 登录 - 获取用户信息
     public static final String GET_USER_INFORMATION = BASE_URL + "/account/account/getUserInfo?logtype=android";
+    // 首页 - more - 退出登录
+    public static final String GET_LOG_OUT = BASE_URL + "/login/login/logout";
 }

@@ -4,22 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.magic.szh.Magic;
 import com.magic.szh.cnf_168p2p.R;
 import com.magic.szh.cnf_168p2p.base.BaseActivity;
-import com.magic.szh.cnf_168p2p.content.home.AccountFragment;
+import com.magic.szh.cnf_168p2p.content.account.AccountFragment;
 import com.magic.szh.cnf_168p2p.content.home.ForumFragment;
 import com.magic.szh.cnf_168p2p.content.login.LoginActivity;
 import com.magic.szh.cnf_168p2p.shared_preference.Constant;
@@ -28,8 +20,6 @@ import com.magic.szh.util.storage.MagicPreference;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
-import butterknife.OnClick;
 
 /**
  * project: CNF_168p2p

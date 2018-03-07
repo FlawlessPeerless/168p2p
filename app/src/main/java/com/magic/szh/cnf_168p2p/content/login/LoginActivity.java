@@ -9,6 +9,10 @@ import android.support.v4.app.FragmentManager;
 import com.magic.szh.cnf_168p2p.R;
 import com.magic.szh.cnf_168p2p.base.BaseActivity;
 import com.magic.szh.cnf_168p2p.base.BaseFragment;
+import com.magic.szh.cnf_168p2p.shared_preference.Constant;
+import com.magic.szh.util.storage.MagicPreference;
+
+import java.security.PublicKey;
 
 /**
  * project: CNF_168p2p
@@ -20,6 +24,25 @@ import com.magic.szh.cnf_168p2p.base.BaseFragment;
  */
 
 public class LoginActivity extends BaseActivity {
+
+    /**
+     * 设置登录配置
+     */
+    public static void setLoginConfig() {
+//        MagicPreference.putString(Constant.SESSION_ID, "");
+        MagicPreference.putBoolean(Constant.USER_PHONE_BINDING, true);
+        MagicPreference.putLong(Constant.USER_LOGIN_DATE, System.currentTimeMillis());
+    }
+
+    /**
+     * 退出登录 重置用户配置信息
+     */
+    public static void clearLogoutConfig() {
+        MagicPreference.putString(Constant.SESSION_ID, "");
+        MagicPreference.putBoolean(Constant.USER_PHONE_BINDING, false);
+        MagicPreference.putLong(Constant.USER_LOGIN_DATE, 0);
+    }
+
     /**
      *  入口点 键
      */

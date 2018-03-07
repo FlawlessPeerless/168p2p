@@ -12,8 +12,20 @@ import com.google.gson.Gson;
  */
 
 public class BaseResponse {
-    protected int code;
-    protected String msg;
+    public static BaseResponse getInstance(String json) {
+        return new Gson().fromJson(json, BaseResponse.class);
+    }
+
+    private int code;
+    private String msg;
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public int getCode() {
         return code;

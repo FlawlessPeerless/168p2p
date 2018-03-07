@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.magic.szh.cnf_168p2p.base.BaseFragment;
-import com.magic.szh.cnf_168p2p.content.home.AccountFragment;
+import com.magic.szh.cnf_168p2p.content.account.AccountFragment;
 import com.magic.szh.cnf_168p2p.content.home.ForumFragment;
 import com.magic.szh.cnf_168p2p.content.home.HomeFragment;
 import com.magic.szh.cnf_168p2p.content.investment.InvestmentFragment;

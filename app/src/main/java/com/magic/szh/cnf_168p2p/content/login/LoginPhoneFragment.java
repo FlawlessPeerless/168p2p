@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
@@ -11,6 +13,9 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Patterns;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +51,8 @@ public class LoginPhoneFragment extends BaseFragment {
     TextInputEditText mEditPhone;
     @BindView(R.id.edit_password)
     TextInputEditText mEditPassword;
+    @BindView(R.id.tool_bar)
+    Toolbar mToolbar;
     /**
      * 入口点标识码{@link LoginActivity}
      */
@@ -58,8 +65,32 @@ public class LoginPhoneFragment extends BaseFragment {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
+        initToolBar();
         initData();
         initLayout();
+    }
+
+    /**
+     * 初始化toolbar
+     */
+    private void initToolBar() {
+        if (getActivity() != null) {
+            ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+            setHasOptionsMenu(true);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                getActivity().finish();
+                return true;
+            default:
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -77,7 +108,7 @@ public class LoginPhoneFragment extends BaseFragment {
         if (TextUtils.isEmpty(telephone)){
             mTextPhone.setVisibility(View.GONE);
         } else {
-            mTextPhone.setText(telephone);
+            mTextPhone.setText(phoneNumberFormat(telephone));
             mEditPhone.setText(telephone);
             mTextPhone.setVisibility(View.VISIBLE);
         }
@@ -102,7 +133,6 @@ public class LoginPhoneFragment extends BaseFragment {
                 }
             }
         });
-
     }
 
     /**
@@ -158,8 +188,8 @@ public class LoginPhoneFragment extends BaseFragment {
                     if (json.getCode() == 200) {
                         // TODO 成功跳转
                         MagicPreference.putString(Constant.SESSION_ID, json.getSessionId());
-                        MagicPreference.putBoolean(Constant.USER_PHONE_BINDING, true);
-                        MagicPreference.putLong(Constant.USER_LOGIN_DATE, System.currentTimeMillis());
+                        MagicPreference.putString(Constant.USER_USER_NAME, phone);
+                        LoginActivity.setLoginConfig();
                         // 获取用户信息
                         getUserInfo();
 

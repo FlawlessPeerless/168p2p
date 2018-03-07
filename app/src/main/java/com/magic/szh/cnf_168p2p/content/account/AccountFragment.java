@@ -1,4 +1,4 @@
-package com.magic.szh.cnf_168p2p.content.home;
+package com.magic.szh.cnf_168p2p.content.account;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
