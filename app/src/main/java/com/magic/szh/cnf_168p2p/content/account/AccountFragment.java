@@ -3,10 +3,15 @@ package com.magic.szh.cnf_168p2p.content.account;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.magic.szh.cnf_168p2p.R;
+import com.magic.szh.cnf_168p2p.api.url.Api;
 import com.magic.szh.cnf_168p2p.base.BaseFragment;
+import com.magic.szh.net.RestClient;
+import com.magic.szh.net.callback.ISuccess;
 
 import butterknife.BindView;
 
@@ -44,18 +49,25 @@ public class AccountFragment extends BaseFragment {
      * 初始化布局
      */
     private void initLayout() {
+        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimaryDark));
         mSwipeRefreshLayout.setOnRefreshListener(() -> {
-            if (mSwipeRefreshLayout.isRefreshing()) return;
-            initData();
-            mSwipeRefreshLayout.setRefreshing(false);
-
+            initData(mSwipeRefreshLayout);
         });
     }
 
     /**
      * 初始化数据
+     * @param swipeRefreshLayout
      */
-    private void initData() {
-
+    private void initData(SwipeRefreshLayout swipeRefreshLayout) {
+        RestClient.builder()
+                .url(Api.GET_ACCOUNT)
+                .success(response -> {
+                    Log.e("110", response);
+                    Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+                    swipeRefreshLayout.setRefreshing(false);
+                })
+                .build()
+                .get();
     }
 }

@@ -29,4 +29,7 @@ public class Api {
     public static final String GET_USER_INFORMATION = BASE_URL + "/account/account/getUserInfo?logtype=android";
     // 首页 - more - 退出登录
     public static final String GET_LOG_OUT = BASE_URL + "/login/login/logout";
+    // 首页 - 用户 - 获取账户信息
+    public static final String  GET_ACCOUNT = BASE_URL + "/account/account/getAccount";
+
 }
