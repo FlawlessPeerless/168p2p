@@ -29,4 +29,8 @@ public class Constant {
      * 用户最近一次登录时间（String 毫秒）
      */
     public static final String USER_LOGIN_DATE = "user_login_date";
+    /**
+     * 是否显示用户账户信息 (boolean 是/否)
+     */
+    public static final String USER_ACCOUNT_DISPLAY_STATUS = "user_account_display_status";
 }

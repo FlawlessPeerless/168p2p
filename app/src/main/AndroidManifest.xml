@@ -25,6 +25,8 @@
             android:launchMode="singleTask"/>
         <!-- 登录 -->
         <activity android:name=".content.login.LoginActivity" />
+        <!-- 账户信息详情 -->
+        <activity android:name=".content.account_information.AccountInformationActivity" />
     </application>
 
 </manifest>
