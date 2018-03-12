@@ -173,7 +173,7 @@ public class AccountFragment extends BaseFragment {
      * 点击查看回款计划
      */
     @OnClick(R.id.button_back_plan)
-    void clickBorwseBackPlan() {
+    void clickBrowseBackPlan() {
         // todo 跳转查看回款计划
         Toast.makeText(getContext(), "回款计划", Toast.LENGTH_SHORT).show();
     }
@@ -182,7 +182,7 @@ public class AccountFragment extends BaseFragment {
      * 点击查看投资记录
      */
     @OnClick(R.id.button_investment_record)
-    void clickBorwseInvestmentRecord() {
+    void clickBrowseInvestmentRecord() {
         // todo 跳转查看投资记录
     }
 
@@ -190,7 +190,7 @@ public class AccountFragment extends BaseFragment {
      * 点击查看资金记录
      */
     @OnClick(R.id.button_fund_record)
-    void clickBorwseFundRecord() {
+    void clickBrowseFundRecord() {
         // todo 跳转查看资金记录
     }
 
@@ -222,7 +222,7 @@ public class AccountFragment extends BaseFragment {
      * 点击组队理财
      */
     @OnClick(R.id.button_finance_group)
-    void clickBorwseFinanceGroup() {
+    void clickBrowseFinanceGroup() {
         // todo 组队理财
     }
 

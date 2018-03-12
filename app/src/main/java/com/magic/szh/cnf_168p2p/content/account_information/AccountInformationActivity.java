@@ -11,7 +11,7 @@ import com.magic.szh.cnf_168p2p.base.BaseActivity;
 
 /**
  * project: CNF_168p2p
- * package: com.magic.szh.cnf_168p2p.content.account_infomation
+ * package: com.magic.szh.cnf_168p2p.content.account_information
  * file: AccountInformationActivity
  * author: admin
  * date: 2018/3/9
@@ -22,6 +22,15 @@ public class AccountInformationActivity extends BaseActivity {
     public static final String KEY_MODULE_NAME = "module_name";
     // 待收收益
     public static final int MODULE_EARNING = 0;
+    // 总资产 & 可用余额
+    public static final int MODULE_TOTAL_ASSETS = 1;
+    // 红包详情
+    public static final int MODULE_BONUS = 2;
+    // 现金券详情
+    public static final int MODULE_CASH_COUPON = 3;
+    // 回款计划
+    public static final int MODULE_CASH_RETURNED_PREVIEW = 4;
+
 
 
     public static void startAccountModule(Context context, int module) {
@@ -49,6 +58,19 @@ public class AccountInformationActivity extends BaseActivity {
             case MODULE_EARNING:
                 Toast.makeText(AccountInformationActivity.this, "待收收益模块进入", Toast.LENGTH_SHORT).show();
                 break;
+            case MODULE_TOTAL_ASSETS:
+                Toast.makeText(AccountInformationActivity.this, "总资产模块进入", Toast.LENGTH_SHORT).show();
+                break;
+            case MODULE_BONUS:
+                Toast.makeText(AccountInformationActivity.this, "红包详情模块进入",Toast.LENGTH_SHORT).show();
+                break;
+            case MODULE_CASH_COUPON:
+                Toast.makeText(AccountInformationActivity.this, "现金券详情模块进入",Toast.LENGTH_SHORT).show();
+                break;
+            case MODULE_CASH_RETURNED_PREVIEW:
+                Toast.makeText(AccountInformationActivity.this, "回款计划详情模块进入",Toast.LENGTH_SHORT).show();
+                break;
+
         }
     }
 }
